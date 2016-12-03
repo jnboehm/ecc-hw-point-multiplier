@@ -18,20 +18,17 @@ The algorithms themselves are very basic, since this is just a beginner's course
 
 * Project stucture
 
-#+BEGIN_SRC sh :export results :results raw
-  tree -L 1 -F
-#+END_SRC
-
-#+RESULTS:
+#+BEGIN_EXAMPLE
 .
-├── build.sh*
+├── build.sh
 ├── build.tcl
-├── #README.org#
+├── README.org
 ├── src/
-├── start.sh*
+├── start.sh
 ├── test/
 ├── waveconfig/
 └── work/
+#+END_EXAMPLE
 
 This is the structure of the project, stolen from the [[https://zenon.cs.hs-rm.de/vhdl-cpu/riscv][vhdl-riscv project]].  To
 create the project run the following:
