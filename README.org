@@ -1,0 +1,55 @@
+#+title: An implementation of elliptic curve cryptography on an FPGA
+
+* Goal
+
+This project aims to implement elliptic curve cryptograhy on an fpga.  This
+means writing code to add and multiply arbitrary long numbers.  Then the
+finite field arithmetic has to be implemented.  We also need Euclid's
+algorithm, this will be accomplished by using The Binary Euclid developed by
+Stein in 1968.  Afterwards we can do the crypto stuff.
+
+The algorithms themselves are very basic, since this is just a beginner's course.
+
+- [ ] Addition
+- [ ] Multiplication
+- [ ] Finite field arithmetic
+- [ ] Binary Euclid
+- [ ] Crypto
+
+* Project stucture
+
+#+BEGIN_SRC sh :export results :results raw
+  tree -L 1 -F
+#+END_SRC
+
+#+RESULTS:
+.
+├── build.sh*
+├── build.tcl
+├── #README.org#
+├── src/
+├── start.sh*
+├── test/
+├── waveconfig/
+└── work/
+
+This is the structure of the project, stolen from the [[https://zenon.cs.hs-rm.de/vhdl-cpu/riscv][vhdl-riscv project]].  To
+create the project run the following:
+
+#+BEGIN_SRC sh
+git clone git@zenon.cs.hs-rm.de:elliptic-fpga/fpga-curves.git
+cd fpga-curves
+./build.sh
+./start.sh
+#+END_SRC
+
+* New files
+
+If new files are added to the project it needs to be rebuild.  Delete the old
+one and rerun te build script.
+
+#+BEGIN_SRC sh
+cd fpga-curves
+rm -rf work/
+./build.sh
+#+END_SRC
