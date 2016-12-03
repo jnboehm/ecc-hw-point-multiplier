@@ -178,6 +178,7 @@ foreach f $file_list {
   set file "$f_name"
   lappend file_list_exp $file
 }
+lappend file_list_exp "$origin_dir/waveconfig/mult_tb_behav.wcfg"
 add_files -norecurse -fileset $obj $file_list_exp
 
 # Set 'sim_1' fileset file properties for remote files
@@ -198,6 +199,8 @@ set_property "transport_int_delay" "0" $obj
 set_property "transport_path_delay" "0" $obj
 set_property "xelab.nosort" "1" $obj
 set_property "xelab.unifast" "" $obj
+set_property "xsim.view" "$origin_dir/waveconfig/mult_tb_behav.wcfg" $obj
+
 
 # Create 'synth_1' run (if not found)
 if {[string equal [get_runs -quiet synth_1] ""]} {

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mult_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="mult_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="2950730413fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="135"></NameColumnWidth>
+      <ValueColumnWidth column_width="172"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="15" />
+   <wvobject type="logic" fp_name="/mult_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mult_tb/a">
+      <obj_property name="ElementShortName">a[9:0]</obj_property>
+      <obj_property name="ObjectShortName">a[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mult_tb/b">
+      <obj_property name="ElementShortName">b[9:0]</obj_property>
+      <obj_property name="ObjectShortName">b[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mult_tb/prd">
+      <obj_property name="ElementShortName">prd[19:0]</obj_property>
+      <obj_property name="ObjectShortName">prd[19:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mult_tb/start">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mult_tb/ready">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mult_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mult_tb/uut/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mult_tb/uut/i">
+      <obj_property name="ElementShortName">i</obj_property>
+      <obj_property name="ObjectShortName">i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mult_tb/uut/line_prd">
+      <obj_property name="ElementShortName">line_prd[19:0]</obj_property>
+      <obj_property name="ObjectShortName">line_prd[19:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mult_tb/opcode">
+      <obj_property name="ElementShortName">opcode[3:0]</obj_property>
+      <obj_property name="ObjectShortName">opcode[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mult_tb/width_a">
+      <obj_property name="ElementShortName">width_a</obj_property>
+      <obj_property name="ObjectShortName">width_a</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mult_tb/width_b">
+      <obj_property name="ElementShortName">width_b</obj_property>
+      <obj_property name="ObjectShortName">width_b</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mult_tb/base">
+      <obj_property name="ElementShortName">base</obj_property>
+      <obj_property name="ObjectShortName">base</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/mult_tb/clk_period">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+</wave_config>
