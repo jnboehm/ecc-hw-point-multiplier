@@ -1,5 +1,59 @@
 
-# Created by https://www.gitignore.io/api/latex,vim,emacs,sublimetext,vivado
+# This was modified to include more rules than the api generated
+# Created by https://www.gitignore.io/api/c,latex,vim,emacs,sublimetext,vivado
+
+### C ###
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
@@ -289,3 +343,9 @@ GitHub.sublime-settings
 
 work/
 *.jou
+
+# files produced by GHDL
+*.cf
+
+# vivado zip file?  Maybe from an exit.
+vivado_*.zip
