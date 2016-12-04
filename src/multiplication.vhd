@@ -19,32 +19,30 @@ end multiplication;
 
 architecture Behavioral of multiplication is
 
-  --states of transition logic
+  -- states of transition logic
   type state_t is (idle, load, check, mult, acc, output);
 
-  --variable represantation of states
+  -- variable represantation of states
   signal state_reg, state_next : state_t;
 
-  --product of a digit and b digit
+  -- product of a digit and b digit
   signal digit_prd      : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal digit_prd_next : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal low_index      : integer;
 
---product of a digit and b
+  -- product of a digit and b
   signal line_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal line_prd_next  : std_logic_vector((width_a + width_b) - 1 downto 0);
-  signal line_prd       : std_logic_vector((width_a + width_b) - 1 downto 0);  --product of a and b
+  signal line_prd       : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal line_prd_waste : std_logic;
 
-  --
+  -- product of a and b
   signal tmp_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal tmp_prd_next  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal tmp_prd       : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal tmp_prd_waste : std_logic;
 
-  --unused
-  --signal carry     : STD_LOGIC_VECTOR(base - 1 downto 0);
-  --counter of sum of line products
+  -- counter of sum of line products
   signal i      : integer;
   signal i_next : integer;
   signal tmp    : std_logic_vector((width_a + width_b) - 1 downto 0);
@@ -139,7 +137,7 @@ begin
   digits : for J in 0 to width_b / base - 1 generate
   begin
 
-    digit_prd ((2 * base) - 1 downto 0) <= std_logic_vector(unsigned(a((i + 1) * base - 1 downto i * base)) * unsigned(b((J + 1) * base - 1 downto J * base)));
+    digit_prd ((2 * base) - 1 downto 0)            <= std_logic_vector(unsigned(a((i + 1) * base - 1 downto i * base)) * unsigned(b((J + 1) * base - 1 downto J * base)));
     tmp                                            <= (others => '0');
     tmp((2 * base + J * base) - 1 downto J * base) <= digit_prd(2*base - 1 downto 0);
 
