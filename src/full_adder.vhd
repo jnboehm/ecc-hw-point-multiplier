@@ -15,7 +15,7 @@ end full_adder;
 
 architecture Behavioral of full_adder is
 
-  signal sum1           : std_logic_vector(base-1 downto 0);
+  signal sum1, b_tmp    : std_logic_vector(base-1 downto 0);
   signal carry1, carry2 : std_logic;
 begin
 
@@ -26,13 +26,14 @@ begin
               s    => sum1,
               cout => carry1);
 
+  b_tmp    <= (others => '0');
+  b_tmp(0) <= cin;
   adder2 : entity work.half_adder(Behavioral)
     generic map (base => base)
-    port map (a                    => sum1,
-              b(0)                 => cin,
-              b(base - 1 downto 1) => (others => '0'),
-              s                    => s,
-              cout                 => carry2);
+    port map (a    => sum1,
+              b    => b_tmp,
+              s    => s,
+              cout => carry2);
 
   --not sure
   cout <= carry1 or carry2;
