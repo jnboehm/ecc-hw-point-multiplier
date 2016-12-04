@@ -13,7 +13,6 @@ entity multiplication is
         prd    : out std_logic_vector((width_a + width_b) - 1 downto 0);
         start  : in  std_logic;
         ready  : out std_logic;
-        opcode : out std_logic_vector(3 downto 0);
         reset  : in  std_logic);
 end multiplication;
 
@@ -102,10 +101,8 @@ begin
 
         if (i = width_a/base - 1) then
           state_next <= output;
-          opcode     <= "1111";
         else
           state_next <= mult;
-          opcode     <= "0001";
 
         end if;
 

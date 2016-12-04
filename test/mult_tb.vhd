@@ -30,7 +30,6 @@ architecture Behavioral of mult_tb is
   signal start : std_logic;
   signal ready : std_logic;
   signal reset: std_logic;
-  signal opcode : std_logic_vector(3 downto 0);
 
 begin
   
@@ -38,7 +37,7 @@ begin
     generic map( base => base,
                  width_a => width_a, 
                  width_b => width_b)
-    port map ( clk => clk, a => a, b => b, prd => prd, start => start, ready => ready, reset => reset, opcode => opcode );
+    port map ( clk => clk, a => a, b => b, prd => prd, start => start, ready => ready, reset => reset );
 
   -- Clock process definitions
   clk_process : process
