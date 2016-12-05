@@ -16,7 +16,7 @@ end rc_adder;
 
 architecture Behavioral of rc_adder is
 
-  signal carry : std_logic_vector(width / base downto 0);
+  signal carry : std_logic_vector(width / base downto 0) := (others => '0');
 
 begin
 
