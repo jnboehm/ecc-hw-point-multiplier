@@ -26,7 +26,6 @@ architecture Behavioral of multiplication is
 
   -- product of a digit and b digit
   signal digit_prd      : std_logic_vector((width_a + width_b) - 1 downto 0);
-  signal digit_prd_next : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal low_index      : integer;
 
   -- product of a digit and b
@@ -92,7 +91,6 @@ begin
 
       when load =>
 
-        digit_prd_next <= (others => '0');
         line_prd_next  <= (others => '0');
         tmp_prd_next   <= (others => '0');
         i_next         <= 0;
@@ -136,15 +134,15 @@ begin
   digits : for J in 0 to width_b / base - 1 generate
   begin
 
-    digit_prd ((2 * base) - 1 downto 0)            <= std_logic_vector(unsigned(a((i + 1) * base - 1 downto i * base)) * unsigned(b((J + 1) * base - 1 downto J * base)));
-    tmp                                            <= (others => '0');
-    tmp((2 * base + J * base) - 1 downto J * base) <= digit_prd(2*base - 1 downto 0);
+    -- digit_prd <= (others => '0');
+    digit_prd ((2 * base + J * base) - 1 downto J * base) <= std_logic_vector(unsigned(a((i + 1) * base - 1 downto i * base))
+                                                                              * unsigned(b((J + 1) * base - 1 downto J * base)));
 
     rc_adder_1 : entity work.rc_adder (Behavioral)
       generic map (base  => base,
                    width => width_a + width_b)
       port map (a   => line_prd,
-                b   => digit_prd_calc,
+                b   => digit_prd,
                 cin => '0',
                 s   => s_tmp);
 
