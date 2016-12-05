@@ -108,13 +108,13 @@ begin
 
         --line_prd_next <= std_logic_vector(unsigned(line_prd_calc) sll i * base);
         line_prd_next <= line_prd_calc;
-        i_next        <= i + 1;
         state_next    <= acc;
 
       when acc =>
 
         -- Add lineprd to tmpprd
         tmp_prd_next <= tmp_prd_calc;
+        i_next        <= i + 1;
         state_next   <= check;
 
       when output =>
