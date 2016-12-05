@@ -7,13 +7,13 @@ entity multiplication is
           width_a : integer := 256;
           width_b : integer := 256);
 
-  port (clk    : in  std_logic;
-        a      : in  std_logic_vector(width_a - 1 downto 0);
-        b      : in  std_logic_vector(width_b - 1 downto 0);
-        prd    : out std_logic_vector((width_a + width_b) - 1 downto 0);
-        start  : in  std_logic;
-        ready  : out std_logic;
-        reset  : in  std_logic);
+  port (clk   : in  std_logic;
+        a     : in  std_logic_vector(width_a - 1 downto 0);
+        b     : in  std_logic_vector(width_b - 1 downto 0);
+        prd   : out std_logic_vector((width_a + width_b) - 1 downto 0);
+        start : in  std_logic;
+        ready : out std_logic;
+        reset : in  std_logic);
 end multiplication;
 
 architecture Behavioral of multiplication is
@@ -59,9 +59,9 @@ begin
 
     elsif (rising_edge(clk)) then       -- Changes on rising edge
       state_reg <= state_next;
+      digit_prd <= digit_prd_next;
       line_prd  <= line_prd_next;
       tmp_prd   <= tmp_prd_next;
-      digit_prd <= digit_prd_next;
       i         <= i_next;
 
     end if;
@@ -110,13 +110,13 @@ begin
 
         --line_prd_next <= std_logic_vector(unsigned(line_prd_calc) sll i * base);
         line_prd_next <= line_prd_calc;
+        i_next        <= i + 1;
         state_next    <= acc;
 
       when acc =>
 
         -- Add lineprd to tmpprd
         tmp_prd_next <= tmp_prd_calc;
-        i_next       <= i + 1;
         state_next   <= check;
 
       when output =>

@@ -1,6 +1,6 @@
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_1164.all;
 use ieee.numeric_std.all;
 
 library std;
@@ -8,10 +8,10 @@ use std.textio.all;
 
 entity mult_tb is
 --  Port ( );
-    generic( width_a : integer := 10;
-             width_b : integer := 10;
-             base : integer := 2 );
-    
+  generic(width_a : integer := 16;
+          width_b : integer := 16;
+          base    : integer := 4);
+
 end mult_tb;
 
 architecture Behavioral of mult_tb is
@@ -21,23 +21,23 @@ architecture Behavioral of mult_tb is
 
   -- Clock
   signal clk : std_logic;
-  
+
   -- Output
-  
-  signal a :   std_logic_vector(width_a - 1 downto 0) := "1000000001";
-  signal b :   std_logic_vector(width_b - 1 downto 0) := "1000000001";
-  signal prd : std_logic_vector(19 downto 0);
+
+  signal a     : std_logic_vector(width_a - 1 downto 0) := "0000001000000001";
+  signal b     : std_logic_vector(width_b - 1 downto 0) := "0000001000000001";
+  signal prd   : std_logic_vector(width_a + width_b - 1 downto 0);
   signal start : std_logic;
   signal ready : std_logic;
-  signal reset: std_logic;
+  signal reset : std_logic;
 
 begin
-  
+
   uut : entity work.multiplication
-    generic map( base => base,
-                 width_a => width_a, 
-                 width_b => width_b)
-    port map ( clk => clk, a => a, b => b, prd => prd, start => start, ready => ready, reset => reset );
+    generic map(base    => base,
+                width_a => width_a,
+                width_b => width_b)
+    port map (clk => clk, a => a, b => b, prd => prd, start => start, ready => ready, reset => reset);
 
   -- Clock process definitions
   clk_process : process
@@ -51,8 +51,8 @@ begin
   -- Stimulus process
   stim_proc : process
 
-  -- Text I/O
-  variable lineBuffer : line;
+    -- Text I/O
+    variable lineBuffer : line;
 
   begin
 
@@ -66,15 +66,15 @@ begin
     wait for 30ns;
 
     reset <= '0';
-    
+
     wait for 200ns;
-   
+
     start <= '1';
-    
+
     wait for 53ns;
-    
+
     start <= '0';
- 
+
     -- Simply wait forever
     wait;
 

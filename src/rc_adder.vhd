@@ -7,8 +7,8 @@ entity rc_adder is
   generic(width : integer := 256;
           base  : integer := 32);
 
-  port (a   : in  std_logic_vector(width-1 downto 0);
-        b   : in  std_logic_vector(width-1 downto 0);
+  port (a   : in  std_logic_vector(width - 1 downto 0);
+        b   : in  std_logic_vector(width - 1 downto 0);
         cin : in  std_logic;
         s   : out std_logic_vector(width downto 0));
 
@@ -22,7 +22,7 @@ begin
 
   adders : for I in 0 to width / base - 1 generate
   begin
-    
+
     adder : entity work.full_adder (Behavioral)
       generic map (base => base)
       port map (a    => a((I + 1) * base - 1 downto I * base),

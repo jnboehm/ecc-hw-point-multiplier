@@ -5,10 +5,10 @@ use ieee.numeric_std.all;
 entity full_adder is
   generic(base : integer);
 
-  port (a    : in  std_logic_vector(base-1 downto 0);
-        b    : in  std_logic_vector(base-1 downto 0);
+  port (a    : in  std_logic_vector(base - 1 downto 0);
+        b    : in  std_logic_vector(base - 1 downto 0);
         cin  : in  std_logic;
-        s    : out std_logic_vector(base-1 downto 0);
+        s    : out std_logic_vector(base - 1 downto 0);
         cout : out std_logic);
 
 end full_adder;
@@ -35,7 +35,7 @@ begin
               s    => s,
               cout => carry2);
 
-  --not sure
+  -- not sure
   cout <= carry1 or carry2;
 
 end Behavioral;
