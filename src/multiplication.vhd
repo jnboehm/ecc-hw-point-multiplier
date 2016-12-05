@@ -43,19 +43,22 @@ architecture Behavioral of multiplication is
   signal tmp_tmp       : std_logic_vector((width_a + width_b) downto 0);
 
   -- counter of sum of line products
-  signal i      : integer;
-  signal i_next : integer;
-  signal tmp    : std_logic_vector((width_a + width_b) - 1 downto 0);
+  signal i          : integer;
+  signal i_next     : integer;
+  signal i_cnt      : integer;
+  signal i_cnt_next : integer;
+  signal tmp        : std_logic_vector((width_a + width_b) - 1 downto 0);
 begin
 
   state_handler : process (clk, reset)
   begin
 
     if (reset = '1') then
-      state_reg      <= idle;           -- Set initial state
-      line_prd       <= (others => '0');
-      tmp_prd        <= (others => '0');
-      i              <= 0;
+      state_reg <= idle;                -- Set initial state
+      line_prd  <= (others => '0');
+      tmp_prd   <= (others => '0');
+      i         <= 0;
+      i_cnt     <= 0;
 
     elsif (rising_edge(clk)) then       -- Changes on rising edge
       state_reg <= state_next;
@@ -75,6 +78,7 @@ begin
     line_prd_next <= line_prd;
     tmp_prd_next  <= tmp_prd;
     i_next        <= i;
+    i_cnt_next    <= i_cnt;
     ready         <= '0';
 
     case (state_reg) is
@@ -89,21 +93,12 @@ begin
 
       when load =>
 
-        line_prd_next  <= (others => '0');
-        tmp_prd_next   <= (others => '0');
-        i_next         <= 0;
+        line_prd_next <= (others => '0');
+        tmp_prd_next  <= (others => '0');
+        i_next        <= 0;
+        i_cnt_next    <= 0;
 
-        state_next <= check;
-
-      when check =>
-
-        -- TODO: bound check?? ,5 klären
-        if (i = width_a/base) then
-          state_next <= output;
-        else
-          state_next <= mult;
-
-        end if;
+        state_next <= mult;
 
       when mult =>
 
@@ -115,8 +110,19 @@ begin
 
         -- Add lineprd to tmpprd
         tmp_prd_next <= tmp_prd_calc;
-        i_next        <= i + 1;
+        i_cnt_next   <= i_cnt + 1;
         state_next   <= check;
+
+      when check =>
+
+        -- TODO: bound check?? ,5 klären
+        if (i_cnt = width_a/base - 1) then
+          state_next <= output;
+        else
+          -- set index to calc new line
+          i_next     <= i + 1;
+          state_next <= mult;
+        end if;
 
       when output =>
 
