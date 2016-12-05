@@ -97,7 +97,8 @@ begin
 
       when check =>
 
-        if (i = width_a/base - 1) then
+        -- TODO: bound check?? ,5 klären
+        if (i = width_a/base) then
           state_next <= output;
         else
           state_next <= mult;
