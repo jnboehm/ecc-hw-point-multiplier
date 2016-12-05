@@ -52,15 +52,13 @@ begin
   begin
 
     if (reset = '1') then
-      state_reg <= idle;                -- Set initial state
-      digit_prd <= (others => '0');
-      line_prd  <= (others => '0');
-      tmp_prd   <= (others => '0');
-      i         <= 0;
+      state_reg      <= idle;           -- Set initial state
+      line_prd       <= (others => '0');
+      tmp_prd        <= (others => '0');
+      i              <= 0;
 
     elsif (rising_edge(clk)) then       -- Changes on rising edge
       state_reg <= state_next;
-      digit_prd <= digit_prd_next;
       line_prd  <= line_prd_next;
       tmp_prd   <= tmp_prd_next;
       i         <= i_next;
