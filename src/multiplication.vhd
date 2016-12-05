@@ -25,8 +25,7 @@ architecture Behavioral of multiplication is
   signal state_reg, state_next : state_t;
 
   -- product of a digit and b digit
-  signal digit_prd      : std_logic_vector((width_a + width_b) - 1 downto 0);
-  signal low_index      : integer;
+  signal digit_prd : std_logic_vector((width_a + width_b) - 1 downto 0);
 
   -- product of a digit and b
   signal line_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
@@ -163,5 +162,5 @@ begin
               cin => '0',
               s   => tmp_tmp);
 
-    tmp_prd_calc <= tmp_tmp(width_a + width_b - 1 downto 0);
+  tmp_prd_calc <= tmp_tmp(width_a + width_b - 1 downto 0);
 end Behavioral;
