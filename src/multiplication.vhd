@@ -34,12 +34,14 @@ architecture Behavioral of multiplication is
   signal line_prd_next  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal line_prd       : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal line_prd_waste : std_logic;
+  signal s_tmp          : std_logic_vector((width_a + width_b) downto 0);
 
   -- product of a and b
   signal tmp_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal tmp_prd_next  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal tmp_prd       : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal tmp_prd_waste : std_logic;
+  signal tmp_tmp       : std_logic_vector((width_a + width_b) downto 0);
 
   -- counter of sum of line products
   signal i      : integer;
@@ -141,21 +143,22 @@ begin
     rc_adder_1 : entity work.rc_adder (Behavioral)
       generic map (base  => base,
                    width => width_a + width_b)
-      port map (a                                 => line_prd(width_a + width_b - 1 downto 0),  -- Pass full line_prd except of last bit to fit the addition process
-                b                                 => tmp,
-                cin                               => '0',
-                s(width_a + width_b - 1 downto 0) => line_prd_calc,
-                s(width_a + width_b)              => line_prd_waste);
+      port map (a   => line_prd,
+                b   => digit_prd_calc,
+                cin => '0',
+                s   => s_tmp);
+
+    line_prd_calc <= s_tmp(width_a + width_b - 1 downto 0);
   end generate;
 
   -- tmp_prd = tmp_prd + line_prd
   rc_adder_2 : entity work.rc_adder (Behavioral)
     generic map (base  => base,
                  width => (width_a + width_b))
-    port map (a                                 => tmp_prd(width_a + width_b - 1 downto 0),
-              b                                 => line_prd(width_a + width_b - 1 downto 0),
-              cin                               => '0',
-              s(width_a + width_b - 1 downto 0) => tmp_prd_calc,
-              s(width_a + width_b)              => tmp_prd_waste);
+    port map (a   => tmp_prd(width_a + width_b - 1 downto 0),
+              b   => line_prd(width_a + width_b - 1 downto 0),
+              cin => '0',
+              s   => tmp_tmp);
 
+    tmp_prd_calc <= tmp_tmp(width_a + width_b - 1 downto 0);
 end Behavioral;
