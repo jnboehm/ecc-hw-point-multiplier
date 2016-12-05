@@ -64,13 +64,14 @@ begin
       line_prd  <= line_prd_next;
       tmp_prd   <= tmp_prd_next;
       i         <= i_next;
+      i_cnt     <= i_cnt_next;
 
     end if;
 
   end process;
 
-  transition : process(i, line_prd, line_prd_calc, start, state_reg, tmp_prd,
-                       tmp_prd_calc)
+  transition : process(i, i_cnt, line_prd, line_prd_calc, start, state_reg,
+                       tmp_prd, tmp_prd_calc)
   begin
     -- Set defaults
     state_next    <= state_reg;
