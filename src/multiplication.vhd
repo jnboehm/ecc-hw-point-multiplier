@@ -102,8 +102,9 @@ begin
       when acc =>
 
         -- Add lineprd to tmpprd
-        tmp_prd_next <= tmp_prd_calc;
-        state_next   <= check;
+        tmp_prd_next  <= tmp_prd_calc;
+        line_prd_next <= (others => '0');
+        state_next    <= check;
 
       when check =>
 
