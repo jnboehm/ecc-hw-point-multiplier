@@ -25,7 +25,9 @@ architecture Behavioral of multiplication is
   signal state_reg, state_next : state_t;
 
   -- product of a digit and b digit
-  signal digit_prd : std_logic_vector((width_a + width_b) - 1 downto 0);
+  signal digit_prd_raw   : std_logic_vector(2 * base - 1 downto 0);
+  signal digit_prd_shift : std_logic_vector((width_a + width_b) - 1 downto 0);
+  signal digit_prd_final : std_logic_vector((width_a + width_b) - 1 downto 0);
 
   -- product of a digit and b
   signal line_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
@@ -136,15 +138,22 @@ begin
   digits : for J in 0 to width_b / base - 1 generate
   begin
 
-    -- digit_prd <= (others => '0');
-    digit_prd ((2 * base + J * base) - 1 downto J * base) <= std_logic_vector(unsigned(a((i + 1) * base - 1 downto i * base))
-                                                                              * unsigned(b((J + 1) * base - 1 downto J * base)));
+    -- We write the bits into the _raw var, then we simply concatenate
+    -- 0s to the front it it and save that into _shift.  We can then
+    -- use the sll operation to shift it to the correct location (we
+    -- have the real digit product of out two digits) and save that
+    -- into _final and give it to the rc_adder.
+    digit_prd_raw <= std_logic_vector(unsigned(a((i + 1) * base - 1 downto i * base))
+                                      * unsigned(b((J + 1) * base - 1 downto J * base)));
+
+    digit_prd_shift <= (digit_prd_shift'high - 1 downto digit_prd_raw'high => '0') & digit_prd_raw;
+    digit_prd_final <= std_logic_vector(unsigned(digit_prd_shift) sll  (i * base + J * base));
 
     rc_adder_1 : entity work.rc_adder (Behavioral)
       generic map (base  => base,
                    width => width_a + width_b)
       port map (a   => line_prd,
-                b   => digit_prd,
+                b   => digit_prd_final,
                 cin => '0',
                 s   => s_tmp);
 
