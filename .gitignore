@@ -347,5 +347,6 @@ work/
 # files produced by GHDL
 *.cf
 
-# vivado zip file?  Maybe from an exit.
+# vivado zip/debug file?  Maybe from an exit.
 vivado_*.zip
+vivado_*.debug
