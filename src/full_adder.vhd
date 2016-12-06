@@ -26,12 +26,10 @@ begin
               s    => sum1,
               cout => carry1);
 
-  b_tmp    <= (others => '0');
-  b_tmp(0) <= cin;
-  adder2 : entity work.half_adder(Behavioral)
+   adder2 : entity work.half_adder(Behavioral)
     generic map (base => base)
     port map (a    => sum1,
-              b    => b_tmp,
+              b    => (0 => cin, others => '0'),
               s    => s,
               cout => carry2);
 
