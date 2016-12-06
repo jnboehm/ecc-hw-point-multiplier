@@ -8,9 +8,9 @@ use std.textio.all;
 
 entity mult_tb is
 --  Port ( );
-  generic(width_a : integer := 2;
-          width_b : integer := 2;
-          base    : integer := 2);
+  generic(width_a : integer := 4;
+          width_b : integer := 4;
+          base    : integer := 4);
 
 end mult_tb;
 
@@ -24,8 +24,8 @@ architecture Behavioral of mult_tb is
 
   -- Output
 
-  signal a     : std_logic_vector(width_a - 1 downto 0) := "01";-- := "0000001000000001";
-  signal b     : std_logic_vector(width_b - 1 downto 0) := "11";-- := "0000001000000001";
+  signal a     : std_logic_vector(width_a - 1 downto 0) := "0111";-- := "0000001000000001";
+  signal b     : std_logic_vector(width_b - 1 downto 0) := "0011";-- := "0000001000000001";
   signal prd   : std_logic_vector(width_a + width_b - 1 downto 0);
   signal start : std_logic;
   signal ready : std_logic;
