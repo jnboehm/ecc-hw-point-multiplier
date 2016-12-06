@@ -19,7 +19,7 @@ end multiplication;
 architecture Behavioral of multiplication is
 
   -- states of transition logic
-  type state_t is (idle, load, check, mult, acc, output);
+  type state_t is (idle, load, check, incr_i, mult, acc, output);
 
   -- variable represantation of states
   signal state_reg, state_next : state_t;
@@ -121,8 +121,12 @@ begin
         else
           -- set index to calc new line
           i_next     <= i + 1;
-          state_next <= mult;
+          state_next <= incr_i;
         end if;
+
+      when incr_i =>
+
+        state_next <= mult;
 
       when output =>
 
