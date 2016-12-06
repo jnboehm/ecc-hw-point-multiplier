@@ -3,9 +3,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity multiplication is
-  generic(base    : integer := 16;
-          width_a : integer := 256;
-          width_b : integer := 256);
+  generic(base    : integer := 2;
+          width_a : integer := 4;
+          width_b : integer := 4);
 
   port (clk   : in  std_logic;
         a     : in  std_logic_vector(width_a - 1 downto 0);
