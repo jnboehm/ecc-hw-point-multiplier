@@ -11,14 +11,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="241373069fs"></ZoomEndTime>
-      <Cursor1Time time="30000000fs"></Cursor1Time>
+      <ZoomEndTime time="34800001fs"></ZoomEndTime>
+      <Cursor1Time time="25600000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="154"></NameColumnWidth>
       <ValueColumnWidth column_width="98"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="18" />
+   <WVObjectSize size="19" />
    <wvobject type="logic" fp_name="/mult_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -79,16 +79,20 @@
       <obj_property name="ElementShortName">s_tmp[8:0]</obj_property>
       <obj_property name="ObjectShortName">s_tmp[8:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/mult_tb/uut/digit_prd_raw">
-      <obj_property name="ElementShortName">digit_prd_raw[3:0]</obj_property>
-      <obj_property name="ObjectShortName">digit_prd_raw[3:0]</obj_property>
+   <wvobject type="array" fp_name="/mult_tb/uut/lmutl/a">
+      <obj_property name="ElementShortName">a[3:0]</obj_property>
+      <obj_property name="ObjectShortName">a[3:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/mult_tb/uut/digit_prd_shift">
-      <obj_property name="ElementShortName">digit_prd_shift[7:0]</obj_property>
-      <obj_property name="ObjectShortName">digit_prd_shift[7:0]</obj_property>
+   <wvobject type="array" fp_name="/mult_tb/uut/lmutl/b">
+      <obj_property name="ElementShortName">b[3:0]</obj_property>
+      <obj_property name="ObjectShortName">b[3:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/mult_tb/uut/digit_prd_final">
-      <obj_property name="ElementShortName">digit_prd_final[7:0]</obj_property>
-      <obj_property name="ObjectShortName">digit_prd_final[7:0]</obj_property>
+   <wvobject type="other" fp_name="/mult_tb/uut/lmutl/i">
+      <obj_property name="ElementShortName">i</obj_property>
+      <obj_property name="ObjectShortName">i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mult_tb/uut/lmutl/prd">
+      <obj_property name="ElementShortName">prd[7:0]</obj_property>
+      <obj_property name="ObjectShortName">prd[7:0]</obj_property>
    </wvobject>
 </wave_config>
