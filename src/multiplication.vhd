@@ -30,8 +30,6 @@ architecture Behavioral of multiplication is
   signal line_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal line_prd_next  : std_logic_vector((width_a + width_b) - 1 downto 0);
   signal line_prd       : std_logic_vector((width_a + width_b) - 1 downto 0);
-  signal line_prd_waste : std_logic;
-  signal s_tmp          : std_logic_vector((width_a + width_b) downto 0);
 
   -- product of a and b
   signal tmp_prd_calc  : std_logic_vector((width_a + width_b) - 1 downto 0);
