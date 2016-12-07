@@ -38,7 +38,7 @@ begin
                                         * unsigned(b((J + 1) * base - 1 downto J * base)));
 
       digit_prd_shift := (digit_prd_shift'high - 1 downto digit_prd_raw'high => '0') & digit_prd_raw;
-      digit_prd_final := std_logic_vector(unsigned(digit_prd_shift) sll (i * base + J));
+      digit_prd_final := std_logic_vector(unsigned(digit_prd_shift) sll (i * base + J * base));
 
       line_prd := std_logic_vector(unsigned(line_prd) + unsigned(digit_prd_final));
 
