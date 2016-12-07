@@ -41,7 +41,7 @@ architecture Behavioral of multiplication is
   signal tmp_tmp       : std_logic_vector((width_a + width_b) downto 0);
 
   -- counter of sum of line products
-  signal i      : integer;
+  signal i      : integer := 0;
   signal i_next : integer;
 begin
 
@@ -94,7 +94,6 @@ begin
 
       when mult =>
 
-        --line_prd_next <= std_logic_vector(unsigned(line_prd_calc) sll i * base);
         line_prd_next <= line_prd_calc;
         state_next    <= acc;
 
