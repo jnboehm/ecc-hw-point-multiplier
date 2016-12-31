@@ -21,7 +21,7 @@ architecture Behavioral of multiplication is
   -- states of transition logic
   type state_t is (idle, load, check, incr_i, mult, acc, output);
 
-  -- variable represantation of states
+  -- variable representation of states
   signal state_reg, state_next : state_t;
 
   -- product of a digit and b digit
@@ -128,7 +128,7 @@ begin
 
   prd <= tmp_prd;
 
-  lmutl : entity work.linemult (Behavioral)
+  lmult : entity work.linemult (Behavioral)
     generic map (base => base, width_a => width_a, width_b => width_b)
     port map (a   => a,
               b   => b,
