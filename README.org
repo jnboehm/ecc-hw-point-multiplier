@@ -10,8 +10,9 @@ Stein in 1968.  Afterwards we can do the crypto stuff.
 
 The algorithms themselves are very basic, since this is just a beginner's course.
 
-- [ ] Addition
-- [ ] Multiplication
+- [X] Addition
+- [X] Multiplication
+- [ ] Modulo
 - [ ] Finite field arithmetic
 - [ ] Binary Euclid
 - [ ] Crypto
