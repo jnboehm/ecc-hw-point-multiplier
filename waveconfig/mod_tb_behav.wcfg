@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mod_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="mod_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="638597141fs"></ZoomStartTime>
+      <ZoomEndTime time="1072280572fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
+      <ValueColumnWidth column_width="622"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="array" fp_name="/mod_tb/c">
+      <obj_property name="ElementShortName">c[395:0]</obj_property>
+      <obj_property name="ObjectShortName">c[395:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s1">
+      <obj_property name="ElementShortName">s1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s1[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s2">
+      <obj_property name="ElementShortName">s2[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s2[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s1_tmp">
+      <obj_property name="ElementShortName">s1_tmp[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s1_tmp[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s1_sub">
+      <obj_property name="ElementShortName">s1_sub[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s1_sub[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s1_mod">
+      <obj_property name="ElementShortName">s1_mod[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s1_mod[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s2_tmp">
+      <obj_property name="ElementShortName">s2_tmp[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s2_tmp[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s2_sub">
+      <obj_property name="ElementShortName">s2_sub[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s2_sub[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s2_mod">
+      <obj_property name="ElementShortName">s2_mod[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s2_mod[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s3_tmp">
+      <obj_property name="ElementShortName">s3_tmp[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s3_tmp[197:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s3_sub">
+      <obj_property name="ElementShortName">s3_sub[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s3_sub[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s3_mod">
+      <obj_property name="ElementShortName">s3_mod[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s3_mod[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/s4">
+      <obj_property name="ElementShortName">s4[197:0]</obj_property>
+      <obj_property name="ObjectShortName">s4[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/res">
+      <obj_property name="ElementShortName">res[191:0]</obj_property>
+      <obj_property name="ObjectShortName">res[191:0]</obj_property>
+   </wvobject>
+</wave_config>
