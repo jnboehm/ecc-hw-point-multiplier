@@ -59,7 +59,10 @@ begin  -- architecture Behavioral
   begin  -- process state_handler
     if reset = '1' then                 -- asynchronous reset (active high)
       state_reg <= idle;
-    -- really nothing else?
+      u1        <= (others => '0'); v1 <= (others => '0'); t1 <= (others => '0');
+      u2        <= (others => '0'); v2 <= (others => '0'); t2 <= (others => '0');
+      u3        <= (others => '0'); v3 <= (others => '0'); t3 <= (others => '0');
+
     elsif rising_edge(clk) then         -- rising clock edge
       state_reg <= state_next;
       u1        <= u1_next; v1 <= v1_next; t1 <= t1_next;
