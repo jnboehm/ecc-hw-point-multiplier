@@ -34,7 +34,8 @@ architecture Behavioral of gcd is
      y6);                               -- Subtract
 
   signal state_reg, state_next     : state_t;
-  signal u, v                      : std_logic_vector(width - 1 downto 0);
+  signal k, k_next                 : integer;
+  signal u, v, u_next, v_next      : std_logic_vector(width - 1 downto 0);
   signal u1, u2, u3                : std_logic_vector(width - 1 downto 0);
   signal v1, v2, v3                : std_logic_vector(width - 1 downto 0);
   signal t1, t2, t3                : std_logic_vector(width - 1 downto 0);
@@ -59,12 +60,15 @@ begin  -- architecture Behavioral
   begin  -- process state_handler
     if reset = '1' then                 -- asynchronous reset (active high)
       state_reg <= idle;
+      k         <= 0;
+      u         <= u_in; v <= v_in;
       u1        <= (others => '0'); v1 <= (others => '0'); t1 <= (others => '0');
       u2        <= (others => '0'); v2 <= (others => '0'); t2 <= (others => '0');
       u3        <= (others => '0'); v3 <= (others => '0'); t3 <= (others => '0');
 
     elsif rising_edge(clk) then         -- rising clock edge
       state_reg <= state_next;
+      u         <= u_next;  v  <= v_next;
       u1        <= u1_next; v1 <= v1_next; t1 <= t1_next;
       u2        <= u2_next; v2 <= v2_next; t2 <= t2_next;
       u3        <= u3_next; v3 <= v3_next; t3 <= t3_next;
@@ -78,6 +82,9 @@ begin  -- architecture Behavioral
 
     -- default transitions
     state_next <= state_reg;
+    k_next     <= k;
+    u_next     <= u;
+    v_next     <= v;
     u1_next    <= u1;
     u2_next    <= u2;
     u3_next    <= u3;
@@ -99,10 +106,16 @@ begin  -- architecture Behavioral
 
       when y1 =>                        -- find power of two
         -- set u and v to have no common powers of two anymore!
-        state_next <= y2;
+        if u(u'right) = '0' and v(v'right) = '0' then
+          u_next     <= u(u'high downto u'high) & u(u'high downto u'low + 1);
+          v_next     <= v(v'high downto v'high) & v(v'high downto v'low + 1);
+          k_next     <= k + 1;
+          state_next <= y1;
+        else
+          state_next <= y2;
+        end if;
 
       when y2 =>                        -- initialize variables
-        -- The simulation shows that smething goes haywire here
 
         -- set (u1, u2, u3) <- (1, 0, u)
         u1_next <= one;
@@ -181,7 +194,7 @@ begin  -- architecture Behavioral
 
   ratio_u <= u1;
   ratio_v <= u2;
-  gcd     <= u3;                        -- TODO: append the zeros that have been
+  gcd     <= u3;                        -- TODO: append the k zeros that have been
                                         -- truncated at the beginning
 
   -- The entities below simply calculate values for the algorithm, the names of
