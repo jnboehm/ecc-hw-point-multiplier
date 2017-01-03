@@ -82,6 +82,7 @@ begin
      -- Wait 30ns
      wait for 30 ns;
 
+    start <= '0';
     -- Simply wait forever
     wait;
 
