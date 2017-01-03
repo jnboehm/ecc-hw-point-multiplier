@@ -128,13 +128,15 @@ begin  -- architecture Behavioral
 
         state_next <= y4;
         if (t1(t1'right) = '0') and (t2(t2'right) = '0') then
-          t1_next <= t1 sra 1;
-          t2_next <= t2 sra 1;
-          t3_next <= t3 sra 1;
+          -- ghetto sra instruction as it's not supported in vivado
+          -- for some reason (use highest bit and truncate the last bit
+          t1_next <= t1(t1'high downto t1'high) & t1(width - 1 downto 1);
+          t2_next <= t2(t2'high downto t2'high) & t2(width - 1 downto 1);
+          t3_next <= t3(t3'high downto t3'high) & t3(width - 1 downto 1);
         else
-          t1_next <= t1_plus_v sra 1;
-          t2_next <= t2_minus_u sra 1;
-          t3_next <= t3 sra 1;
+          t1_next <= t1_plus_v(t1_plus_v'high downto t1_plus_v'high) & t1_plus_v(width - 1 downto 1);
+          t2_next <= t2_minus_u(t2_minus_u'high downto t2_minus_u'high) & t2_minus_u(width - 1 downto 1);
+          t3_next <= t3(t3'high downto t3'high) & t3(width - 1 downto 1);
         end if;
 
       when y4 =>
