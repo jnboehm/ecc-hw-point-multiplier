@@ -102,6 +102,7 @@ begin  -- architecture Behavioral
         state_next <= y2;
 
       when y2 =>                        -- initialize variables
+        -- The simulation shows that smething goes haywire here
 
         -- set (u1, u2, u3) <- (1, 0, u)
         u1_next <= one;
@@ -167,7 +168,7 @@ begin  -- architecture Behavioral
         end if;
 
       when y6 =>
-
+        -- Subtraction has to be done here
         if t3 = (t3'range => '0') then
           ready      <= '1';
           state_next <= idle;
