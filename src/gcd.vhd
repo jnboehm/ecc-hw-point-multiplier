@@ -149,7 +149,9 @@ begin  -- architecture Behavioral
       when y5 =>                        -- reset max(u3, v3)
 
         state_next <= y6;
-        if t3(t3'left) = '0' then       -- t3 is positive (does 0 count too?)
+        -- t3 is positive (does 0 count too?  Prob. not since then the
+        -- gcd's output would be 0)
+        if t3(t3'left) = '0' and t3 = (t3'range => '0') then
           u1_next <= t1;
           u2_next <= t2;
           u3_next <= t3;
