@@ -104,25 +104,25 @@ begin  -- architecture Behavioral
       when y2 =>                        -- initialize variables
 
         -- set (u1, u2, u3) <- (1, 0, u)
-        u1 <= one;
-        u2 <= (others => '0');
-        u3 <= u;
+        u1_next <= one;
+        u2_next <= (others => '0');
+        u3_next <= u;
 
         -- and (v1, v2, v3) <- (v, 1 - u, v)
-        v1 <= v;
-        v2 <= one_minus_u;
-        v3 <= v;
+        v1_next <= v;
+        v2_next <= one_minus_u;
+        v3_next <= v;
 
         if u(u'right) = '1' then        -- u is odd
-          -- set (t1, t2, t3) <- 0, -1, -v)
-          t1         <= (others => '0');
-          t2         <= (others => '1');  -- -1 in two's complement representation
-          t3         <= minus_v;
+          -- set (t1, t2, t3) <- (0, -1, -v)
+          t1_next    <= (others => '0');
+          t2_next    <= (others => '1');  -- -1 in two's complement representation
+          t3_next    <= minus_v;
           state_next <= y4;
         else                            -- u is even
-          t1         <= (others => '0');
-          t2         <= (others => '1');
-          t3         <= u;
+          t1_next    <= (others => '0');
+          t2_next    <= (others => '1');
+          t3_next    <= u;
           state_next <= y3;
         end if;
 
