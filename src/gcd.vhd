@@ -6,7 +6,8 @@ use ieee.numeric_std.all;
 -- Programming" Vol. 2 in "Answers to the Exercises" pg.646
 entity gcd is
 
-  generic (width : integer := 392);     -- bit vector width
+  generic (width : integer := 392;      -- bit vector width
+           base  : integer := 18);      -- base for the add and sub entities
 
   port (
     clk     : in  std_logic;            -- clock signal
@@ -194,14 +195,15 @@ begin  -- architecture Behavioral
 
   ratio_u <= u1;
   ratio_v <= u2;
-  gcd     <= u3;                        -- TODO: append the k zeros that have been
-                                        -- truncated at the beginning
+  gcd     <= u3;  -- TODO: append the k zeros that have been
+                -- truncated at the beginning
 
   -- The entities below simply calculate values for the algorithm, the names of
   -- the output itself should give away what the result is.
 
   one_sub_u : entity work.subtraction (Behavioral)
-    generic map(width => width)
+    generic map(width => width,
+                base  => base)
     port map(a   => one,
              b   => u,
              cin => '0',
@@ -220,7 +222,8 @@ begin  -- architecture Behavioral
 
   -- t1 + v
   t1_add_v : entity work.rc_adder_standard (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a    => t1,
               b    => v,
               cin  => '0',
@@ -229,7 +232,8 @@ begin  -- architecture Behavioral
 
   -- t2 - u
   t2_sub_u : entity work.subtraction (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a   => t2,
               b   => u,
               cin => '0',
@@ -237,7 +241,8 @@ begin  -- architecture Behavioral
 
   -- v - t1
   v_sub_t1 : entity work.subtraction (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a   => v,
               b   => t1,
               cin => '0',
@@ -245,7 +250,8 @@ begin  -- architecture Behavioral
 
   -- -u - t2
   minus_u_sub_t2 : entity work.subtraction (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a   => minus_u,
               b   => t2,
               cin => '0',
@@ -259,7 +265,8 @@ begin  -- architecture Behavioral
 
   -- u1 - v1
   u1_sub_v1 : entity work.subtraction (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a   => u1,
               b   => v1,
               cin => '0',
@@ -267,7 +274,8 @@ begin  -- architecture Behavioral
 
   -- u2 - v2
   u2_sub_v2 : entity work.subtraction (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a   => u2,
               b   => v2,
               cin => '0',
@@ -275,7 +283,8 @@ begin  -- architecture Behavioral
 
   -- u3 - v3
   u3_sub_v3 : entity work.subtraction (Behavioral)
-    generic map (width => width)
+    generic map (width => width,
+                 base  => base)
     port map (a   => u3,
               b   => v3,
               cin => '0',
