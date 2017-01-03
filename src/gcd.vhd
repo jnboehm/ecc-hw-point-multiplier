@@ -131,11 +131,13 @@ begin  -- architecture Behavioral
         state_next <= y4;
         if (t1(t1'right) = '0') and (t2(t2'right) = '0') then
           -- ghetto sra instruction as it's not supported in vivado
-          -- for some reason (use highest bit and truncate the last bit
+          -- for some reason.  Use highest bit to shift into and
+          -- truncate the last bit
           t1_next <= t1(t1'high downto t1'high) & t1(width - 1 downto 1);
           t2_next <= t2(t2'high downto t2'high) & t2(width - 1 downto 1);
           t3_next <= t3(t3'high downto t3'high) & t3(width - 1 downto 1);
         else
+          -- set (t1, t2, t3) <- (t1 + v, t2 - u, t3) / 2
           t1_next <= t1_plus_v(t1_plus_v'high downto t1_plus_v'high) & t1_plus_v(width - 1 downto 1);
           t2_next <= t2_minus_u(t2_minus_u'high downto t2_minus_u'high) & t2_minus_u(width - 1 downto 1);
           t3_next <= t3(t3'high downto t3'high) & t3(width - 1 downto 1);
@@ -178,8 +180,8 @@ begin  -- architecture Behavioral
 
   ratio_u <= u1;
   ratio_v <= u2;
-  gcd     <= u3;                        -- append the zeros that have been
-  -- truncated at the beginning
+  gcd     <= u3;                        -- TODO: append the zeros that have been
+                                        -- truncated at the beginning
 
   -- The entities below simply calculate values for the algorithm, the names of
   -- the output itself should give away what the result is.
