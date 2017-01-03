@@ -6,8 +6,7 @@ use ieee.numeric_std.all;
 -- Programming" Vol. 2 in "Answers to the Exercises" pg.646
 entity gcd is
 
-  generic (
-    width : integer := 392);            -- bit vector width
+  generic (width : integer := 392);     -- bit vector width
 
   port (
     clk     : in  std_logic;            -- clock signal
@@ -192,7 +191,7 @@ begin  -- architecture Behavioral
     port map(num => v,
              neg => minus_v);
 
-  zero_sub_u : entity work.invert_twos_complement (Behauioral)
+  zero_sub_u : entity work.invert_twos_complement (Behavioral)
     generic map(width => width)
     port map(num => u,
              neg => minus_u);
