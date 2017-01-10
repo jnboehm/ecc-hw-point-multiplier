@@ -69,7 +69,8 @@ begin  -- architecture Behavioral
 
     elsif rising_edge(clk) then         -- rising clock edge
       state_reg <= state_next;
-      u         <= u_next;  v  <= v_next;
+      k         <= k_next;
+      u         <= u_next;  v <= v_next;
       u1        <= u1_next; v1 <= v1_next; t1 <= t1_next;
       u2        <= u2_next; v2 <= v2_next; t2 <= t2_next;
       u3        <= u3_next; v3 <= v3_next; t3 <= t3_next;
