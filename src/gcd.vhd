@@ -135,8 +135,8 @@ begin  -- architecture Behavioral
           t3_next    <= minus_v;
           state_next <= y4;
         else                            -- u is even
-          t1_next    <= (others => '0');
-          t2_next    <= (others => '1');
+          t1_next    <= one;
+          t2_next    <= (others => '0');
           t3_next    <= u;
           state_next <= y3;
         end if;
