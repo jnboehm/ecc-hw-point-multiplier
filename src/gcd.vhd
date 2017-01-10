@@ -32,6 +32,8 @@ architecture Behavioral of gcd is
      y3,                                -- Halve t_3
      y4,                                -- Is t_3 even?
      y5,                                -- Reset max(u_3, v_3)
+     y5_nop,                            -- wait for calculation
+     y6_assign,                         -- assign t <- u - v
      y6);                               -- Subtract
 
   signal state_reg, state_next     : state_t;
@@ -171,7 +173,7 @@ begin  -- architecture Behavioral
 
       when y5 =>                        -- reset max(u3, v3)
 
-        state_next <= y6;
+        state_next <= y5_nop;
         -- t3 is positive (does 0 count too?  Prob. not since then the
         -- gcd's output would be 0)
         if t3 = (t3'range => '0') or not t3(t3'high) = '1' then
@@ -184,7 +186,23 @@ begin  -- architecture Behavioral
           v3_next <= minus_t3;
         end if;
 
+      when y5_nop =>
+        state_next <= y6_assign;
+
+      when y6_assign =>
+
+        state_next <= y6;
+        t1_next <= u1_minus_v1;
+        t2_next <= u2_minus_v2;
+        t3_next <= u3_minus_v3;
+
       when y6 =>
+
+        if t1(t1'high) = '1' or t1 = (t1'range => '0') then -- if t1 <= 0
+          t1_next <= t1_plus_v;
+          t2_next <= t2_minus_u;
+        end if;
+
         -- Subtraction has to be done here
         if t3 = (t3'range => '0') then
           if k = 0 then
