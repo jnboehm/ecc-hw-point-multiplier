@@ -85,6 +85,7 @@ begin  -- architecture Behavioral
 
     -- default transitions
     state_next <= state_reg;
+    ready      <= '0';
     k_next     <= k;
     u_next     <= u;
     v_next     <= v;
