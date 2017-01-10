@@ -173,7 +173,7 @@ begin  -- architecture Behavioral
         state_next <= y6;
         -- t3 is positive (does 0 count too?  Prob. not since then the
         -- gcd's output would be 0)
-        if t3(t3'left) = '0' and t3 = (t3'range => '0') then
+        if t3 = (t3'range => '0') or not t3(t3'high) = '1' then
           u1_next <= t1;
           u2_next <= t2;
           u3_next <= t3;
