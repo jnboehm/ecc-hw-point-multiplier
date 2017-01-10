@@ -186,8 +186,13 @@ begin  -- architecture Behavioral
       when y6 =>
         -- Subtraction has to be done here
         if t3 = (t3'range => '0') then
-          ready      <= '1';
+          if k = 0 then
+            gcd <= u3;
+          else
+            gcd <= u3(u3'left - k downto 0) & (k - 1 downto 0 => '0');
+          end if;
           state_next <= idle;
+          ready <= '1';
         else
           state_next <= y3;
         end if;
@@ -197,8 +202,7 @@ begin  -- architecture Behavioral
 
   ratio_u <= u1;
   ratio_v <= u2;
-  gcd     <= u3;  -- TODO: append the k zeros that have been
-                -- truncated at the beginning
+
 
   -- The entities below simply calculate values for the algorithm, the names of
   -- the output itself should give away what the result is.
