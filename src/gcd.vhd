@@ -77,9 +77,10 @@ begin  -- architecture Behavioral
     end if;
   end process state_handler;
 
-  transition : process (minus_t3, minus_u_minus_t2, minus_v, one_minus_u,
+  transition : process (k, minus_t3, minus_u_minus_t2, minus_v, one_minus_u,
                         start, state_reg, t1, t1_plus_v, t2, t2_minus_u, t3, u,
-                        u1, u2, u3, v, v1, v2, v3, v_minus_t1)
+                        u1, u1_minus_v1, u2, u2_minus_v2, u3, u3_minus_v3, v,
+                        v1, v2, v3, v_minus_t1)
   begin  -- process transition
 
     -- default transitions
