@@ -204,6 +204,9 @@ begin  -- architecture Behavioral
         end if;
 
         -- Subtraction has to be done here
+        -- actually revese what we did in y1, we cannot slice with a signal
+        -- (that changes its value).  So basically decrement k by one and
+        -- append a signel zero until k = 0.
         if t3 = (t3'range => '0') then
           if k = 0 then
             gcd <= u3;
