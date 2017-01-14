@@ -80,15 +80,15 @@ begin
     reset <= '1';
 
     -- Wait 30ns
-    wait for 30ns;
+    wait for 30 ns;
 
     reset <= '0';
 
-    wait for 200ns;
+    wait for 200 ns;
 
     start <= '1';
 
-    wait for 53ns;
+    wait for 53 ns;
 
     start <= '0';
 

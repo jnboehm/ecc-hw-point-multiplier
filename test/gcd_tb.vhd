@@ -1,6 +1,6 @@
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_1164.all;
 use ieee.numeric_std.all;
 
 library std;
@@ -24,20 +24,20 @@ architecture Behavioral of gcd_tb is
   -- Output
   -- signal led : std_logic;
 
-  signal gcd_res : std_logic_vector(width - 1 downto 0);
-  signal u_in, v_in : std_logic_vector(width - 1 downto 0);
-  signal r_u, r_v : std_logic_vector(width - 1 downto 0);
+  signal gcd_res             : std_logic_vector(width - 1 downto 0);
+  signal u_in, v_in          : std_logic_vector(width - 1 downto 0);
+  signal r_u, r_v            : std_logic_vector(width - 1 downto 0);
   signal start, reset, ready : std_logic;
 
 begin
 
   uut : entity work.gcd
-    generic map( width => width )
-    port map ( clk => clk, u_in => u_in,
-               v_in => v_in, gcd => gcd_res,
-               ratio_u => r_u, ratio_v => r_v,
-               start => start, reset => reset,
-               ready => ready );
+    generic map(width => width)
+    port map (clk     => clk, u_in => u_in,
+              v_in    => v_in, gcd => gcd_res,
+              ratio_u => r_u, ratio_v => r_v,
+              start   => start, reset => reset,
+              ready   => ready);
 
   -- Clock process definitions
   clk_process : process
@@ -80,8 +80,8 @@ begin
 
     start <= '1';
 
-     -- Wait 30ns
-     wait for 30 ns;
+    -- Wait 30ns
+    wait for 30 ns;
 
     start <= '0';
     -- Simply wait forever
