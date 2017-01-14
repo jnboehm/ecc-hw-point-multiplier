@@ -358,6 +358,7 @@ begin
 
       when c3_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c3_wait;
@@ -388,6 +389,7 @@ begin
 
       when c4_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c4_wait;
@@ -418,6 +420,7 @@ begin
 
       when c5_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c5_wait;
@@ -448,6 +451,7 @@ begin
 
       when c6_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c6_wait;
@@ -519,6 +523,7 @@ begin
 
       when c10_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c10_wait;
@@ -549,6 +554,7 @@ begin
 
       when c11_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c11_wait;
@@ -579,6 +585,7 @@ begin
 
       when c12_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c12_wait;
@@ -609,6 +616,7 @@ begin
 
       when c13_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c13_wait;
@@ -662,6 +670,7 @@ begin
 
       when c15_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c15_wait;
@@ -733,6 +742,7 @@ begin
 
       when c19_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c19_wait;
@@ -763,6 +773,7 @@ begin
 
       when c20_start =>
 
+        mult_reset_next <= '0';
         mult_start_next <= '1';
 
         state_next <= c20_wait;
