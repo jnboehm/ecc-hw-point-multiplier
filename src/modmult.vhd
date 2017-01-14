@@ -37,9 +37,14 @@ architecture Behavioral of modmult is
   signal tmp_prd_waste : std_logic;
   signal tmp_tmp       : std_logic_vector((width + width) downto 0);
 
+  signal pre_mod_prd   : std_logic_vector((width + width) - 1 downto 0);
   -- fits the size of the result from modp192.  Used for combinatorial
   -- circuit.
+  signal prd_small_calc : std_logic_vector(191 downto 0);
+  signal prd_small_next : std_logic_vector(191 downto 0);
   signal prd_small : std_logic_vector(191 downto 0);
+
+  signal ready_next : std_logic;
 
   -- counter of sum of line products
   signal i      : integer := 0;
@@ -50,16 +55,19 @@ begin
   begin
 
     if (reset = '1') then
-      state_reg <= idle;                -- Set initial state
-      line_prd  <= (others => '0');
-      tmp_prd   <= (others => '0');
-      i         <= 0;
+      state_reg   <= idle;              -- Set initial state
+      line_prd    <= (others => '0');
+      tmp_prd     <= (others => '0');
+      prd_small   <= (others => '0');
+      i           <= 0;
 
     elsif (rising_edge(clk)) then       -- Changes on rising edge
       state_reg <= state_next;
       line_prd  <= line_prd_next;
       tmp_prd   <= tmp_prd_next;
       i         <= i_next;
+      ready     <= ready_next;
+      prd_small <= prd_small_next;
 
     end if;
 
@@ -73,7 +81,8 @@ begin
     line_prd_next <= line_prd;
     tmp_prd_next  <= tmp_prd;
     i_next        <= i;
-    ready         <= '0';
+    ready_next    <= '0';
+    prd_small_next <= prd_small;
 
     case (state_reg) is
 
@@ -122,11 +131,12 @@ begin
 
       when wait_mod =>
 
+        prd_small_next <= prd_small_calc;
         state_next <= output;
 
       when output =>
 
-        ready      <= '1';
+        ready_next <= '1';
         state_next <= idle;
 
     end case;
@@ -151,11 +161,11 @@ begin
 
   tmp_prd_calc <= tmp_tmp(width + width - 1 downto 0);
 
-  modprd: entity work.modp192 (Behavioral)
+  modprd : entity work.modp192 (Behavioral)
     generic map (base => base,
                  width => 2 * width)
     port map (c => tmp_prd,
-              res => prd_small);
+              res => prd_small_calc);
 
   prd <= "000000" & prd_small;
 end Behavioral;
