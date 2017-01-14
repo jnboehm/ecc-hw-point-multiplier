@@ -119,19 +119,6 @@ architecture Behavioral of point_addition is
   signal mult_start_next : std_logic;
   signal mult_ready_next : std_logic;
   signal mult_prd_next   : std_logic_vector(width - 1 downto 0);
-  -----------------------------------
-  signal mod_in_next     : std_logic_vector(2 * width - 1 downto 0);
-  signal mod_res_next    : std_logic_vector(width - 1 downto 0);
-  -----------------------------------
-  signal gcd_u_next       : std_logic_vector(width - 1 downto 0);
-  signal gcd_v_next       : std_logic_vector(width - 1 downto 0);
-  signal gcd_res_next     : std_logic_vector(width - 1 downto 0);
-  signal gcd_ratio_u_next : std_logic_vector(width - 1 downto 0);
-  signal gcd_ratio_v_next : std_logic_vector(width - 1 downto 0);
-  signal gcd_start_next   : std_logic;
-  signal gcd_reset_next   : std_logic;
-  signal gcd_ready_next   : std_logic;
-
 
   -----------------------------------
   -- function signals
@@ -150,18 +137,6 @@ architecture Behavioral of point_addition is
   signal mult_start : std_logic;
   signal mult_ready : std_logic;
   signal mult_prd   : std_logic_vector(width - 1 downto 0);
-  -----------------------------------
-  signal mod_in     : std_logic_vector(2 * width - 1 downto 0);
-  signal mod_res    : std_logic_vector(width - 1 downto 0);
-  -----------------------------------
-  signal gcd_u       : std_logic_vector(width - 1 downto 0);
-  signal gcd_v       : std_logic_vector(width - 1 downto 0);
-  signal gcd_res     : std_logic_vector(width - 1 downto 0);
-  signal gcd_ratio_u : std_logic_vector(width - 1 downto 0);
-  signal gcd_ratio_v : std_logic_vector(width - 1 downto 0);
-  signal gcd_start   : std_logic;
-  signal gcd_reset   : std_logic;
-  signal gcd_ready   : std_logic;
 
   -- the constant p192 as specified by the NIST standard.
   constant p192 : std_logic_vector(width - 1 downto 0) := "000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111111111111111111111111111111111111111111111111111111111";
@@ -230,18 +205,6 @@ begin
       mult_start <= mult_start_next;
       mult_ready <= mult_ready_next;
       mult_prd <= mult_prd_next;
-      -----------------------------------
-      mod_in <= mod_in_next;
-      mod_res <= mod_res_next;
-      -----------------------------------
-      gcd_u <= gcd_u_next;
-      gcd_v <= gcd_v_next;
-      gcd_res <= gcd_res_next;
-      gcd_ratio_u <= gcd_ratio_u_next;
-      gcd_ratio_v <= gcd_ratio_v_next;
-      gcd_start <= gcd_start_next;
-      gcd_reset <= gcd_reset_next;
-      gcd_ready <= gcd_ready_next;
 
     end if;
 
@@ -288,18 +251,6 @@ begin
     mult_start_next <= mult_start;
     mult_ready_next <= mult_ready;
     mult_prd_next <= mult_prd;
-    -----------------------------------
-    mod_in_next <= mod_in;
-    mod_res_next <= mod_res;
-    -----------------------------------
-    gcd_u_next <= gcd_u;
-    gcd_v_next <= gcd_v;
-    gcd_res_next <= gcd_res;
-    gcd_ratio_u_next <= gcd_ratio_u;
-    gcd_ratio_v_next <= gcd_ratio_v;
-    gcd_start_next <= gcd_start;
-    gcd_reset_next <= gcd_reset;
-    gcd_ready_next <= gcd_ready;
 
 
     -----------------------------------     
@@ -345,18 +296,6 @@ begin
         mult_start_next <= '0';
         mult_ready_next <= '0';
         mult_prd_next   <= (others => '0');
-        -----------------------------------
-        mod_in_next     <= (others => '0');
-        mod_res_next    <= (others => '0');
-        -----------------------------------
-        gcd_u_next       <= (others => '0');
-        gcd_v_next       <= (others => '0');
-        gcd_res_next     <= (others => '0');
-        gcd_ratio_u_next <= (others => '0');
-        gcd_ratio_v_next <= (others => '0');
-        gcd_start_next   <= '0';
-        gcd_reset_next   <= '0';
-        gcd_ready_next   <= '0';
 
         state_next <= check_infty;
 
@@ -912,32 +851,6 @@ begin
               start => mult_start,
               ready => mult_ready,      -- assign mult_prd when mult_ready == 1
               prd   => mult_prd);
-
-  -----------------------------------
-  -- MODULO
-  -----------------------------------
-  modulo : entity work.modp192 (Behavioral)
-    generic map (base  => base,
-                 width => (width + width))
-    port map (c   => mod_in,
-              res => mod_res);
-
-  -----------------------------------
-  -- GCD
-  -----------------------------------
-  gcd : entity work.gcd (Behavioral)
-    generic map (base  => base,
-                 width => (width + width))
-    port map (clk => clk,
-              u_in    => gcd_u,
-              v_in    => gcd_v,
-              gcd     => gcd_res,
-              ratio_u => gcd_ratio_u,
-              ratio_v => gcd_ratio_v,
-              start   => gcd_start,
-              reset   => gcd_reset,
-              ready   => gcd_ready);
-
 
 
 end Behavioral;
