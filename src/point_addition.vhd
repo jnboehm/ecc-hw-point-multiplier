@@ -10,21 +10,21 @@ entity point_addition is
 
   port (clk   : in  std_logic;
         -- First point in projective coordinates.
-        X1   : in  std_logic_vector(width - 1 downto 0);
-        Y1   : in  std_logic_vector(width - 1 downto 0);
-        Z1   : in  std_logic_vector(width - 1 downto 0);
+        X1    : in  std_logic_vector(width - 1 downto 0);
+        Y1    : in  std_logic_vector(width - 1 downto 0);
+        Z1    : in  std_logic_vector(width - 1 downto 0);
         -- second point in projective coordinates.  The original algorithm
         -- specifies that Q (the second point) is in affine coordinates but
         -- there is no represenetation for the point at infinity in this
         -- represenetation, hence we use projective coordinates here, too, and
         -- convert Q to affine coordinates if need be.
-        X2_p : in  std_logic_vector(width - 1 downto 0);
-        Y2_p : in  std_logic_vector(width - 1 downto 0);
-        Z2_p : in  std_logic_vector(width - 1 downto 0);
+        X2_p  : in  std_logic_vector(width - 1 downto 0);
+        Y2_p  : in  std_logic_vector(width - 1 downto 0);
+        Z2_p  : in  std_logic_vector(width - 1 downto 0);
         -- result in projective coordinates.
-        X3   : out std_logic_vector(width - 1 downto 0);
-        Y3   : out std_logic_vector(width - 1 downto 0);
-        Z3   : out std_logic_vector(width - 1 downto 0);
+        X3    : out std_logic_vector(width - 1 downto 0);
+        Y3    : out std_logic_vector(width - 1 downto 0);
+        Z3    : out std_logic_vector(width - 1 downto 0);
         start : in  std_logic;
         ready : out std_logic;
         reset : in  std_logic);
@@ -78,13 +78,13 @@ architecture Behavioral of point_addition is
   -----------------------------------
   -- reg signal
   -----------------------------------
-  signal T1 : std_logic_vector(width - 1 downto 0);
-  signal T2 : std_logic_vector(width - 1 downto 0);
-  signal T3 : std_logic_vector(width - 1 downto 0);
-  signal T4 : std_logic_vector(width - 1 downto 0);
+  signal T1     : std_logic_vector(width - 1 downto 0);
+  signal T2     : std_logic_vector(width - 1 downto 0);
+  signal T3     : std_logic_vector(width - 1 downto 0);
+  signal T4     : std_logic_vector(width - 1 downto 0);
   -----------------------------------
-  signal x2 : std_logic_vector(width - 1 downto 0);
-  signal y2 : std_logic_vector(width - 1 downto 0);
+  signal x2     : std_logic_vector(width - 1 downto 0);
+  signal y2     : std_logic_vector(width - 1 downto 0);
   -----------------------------------
   signal X3_tmp : std_logic_vector(width - 1 downto 0);
   signal Y3_tmp : std_logic_vector(width - 1 downto 0);
@@ -93,17 +93,17 @@ architecture Behavioral of point_addition is
   -----------------------------------
   -- next signal
   -----------------------------------
-  signal T1_next : std_logic_vector(width - 1 downto 0);
-  signal T2_next : std_logic_vector(width - 1 downto 0);
-  signal T3_next : std_logic_vector(width - 1 downto 0);
-  signal T4_next : std_logic_vector(width - 1 downto 0);
+  signal T1_next         : std_logic_vector(width - 1 downto 0);
+  signal T2_next         : std_logic_vector(width - 1 downto 0);
+  signal T3_next         : std_logic_vector(width - 1 downto 0);
+  signal T4_next         : std_logic_vector(width - 1 downto 0);
   -----------------------------------
-  signal x2_next : std_logic_vector(width - 1 downto 0);
-  signal y2_next : std_logic_vector(width - 1 downto 0);
+  signal x2_next         : std_logic_vector(width - 1 downto 0);
+  signal y2_next         : std_logic_vector(width - 1 downto 0);
   -----------------------------------
-  signal X3_next   : std_logic_vector(width - 1 downto 0);
-  signal Y3_next   : std_logic_vector(width - 1 downto 0);
-  signal Z3_next   : std_logic_vector(width - 1 downto 0);
+  signal X3_next         : std_logic_vector(width - 1 downto 0);
+  signal Y3_next         : std_logic_vector(width - 1 downto 0);
+  signal Z3_next         : std_logic_vector(width - 1 downto 0);
   -----------------------------------
   signal add_a_next      : std_logic_vector(width - 1 downto 0);
   signal add_b_next      : std_logic_vector(width - 1 downto 0);
@@ -157,54 +157,54 @@ begin
     if (reset = '1') then
       state_reg <= idle;                -- Set initial state
       -----------------------------------
-      T1 <= (others => '0');
-      T2 <= (others => '0');
-      T3 <= (others => '0');
-      T4 <= (others => '0');
+      T1        <= (others => '0');
+      T2        <= (others => '0');
+      T3        <= (others => '0');
+      T4        <= (others => '0');
       -----------------------------------
-      x2 <= (others => '0');
-      y2 <= (others => '0');
+      x2        <= (others => '0');
+      y2        <= (others => '0');
       -----------------------------------
-      X3_tmp <= (others => '0');
-      Y3_tmp <= (others => '0');
-      Z3_tmp <= (others => '0');
+      X3_tmp    <= (others => '0');
+      Y3_tmp    <= (others => '0');
+      Z3_tmp    <= (others => '0');
 
     -----------------------------------
     -- assign next value to reg
-    ----------------------------------- 
+    -----------------------------------
     elsif (rising_edge(clk)) then       -- Changes on rising edge
-      state_reg <= state_next;
+      state_reg  <= state_next;
       -----------------------------------
-      T1 <= T1_next;
-      T2 <= T2_next;
-      T3 <= T3_next;
-      T4 <= T4_next;
+      T1         <= T1_next;
+      T2         <= T2_next;
+      T3         <= T3_next;
+      T4         <= T4_next;
       -----------------------------------
-      x2 <= x2_next;
-      y2 <= y2_next;
+      x2         <= x2_next;
+      y2         <= y2_next;
       -----------------------------------
-      X3 <= X3_next;
-      Y3 <= Y3_next;
-      Z3 <= Z3_next;
+      X3         <= X3_next;
+      Y3         <= Y3_next;
+      Z3         <= Z3_next;
       -----------------------------------
-      X3_tmp <= X3_next;
-      Y3_tmp <= Y3_next;
-      Z3_tmp <= Z3_next;
+      X3_tmp     <= X3_next;
+      Y3_tmp     <= Y3_next;
+      Z3_tmp     <= Z3_next;
       -----------------------------------
-      add_a <= add_a_next;
-      add_b <= add_b_next;
-      add_sum <= add_sum_next;
+      add_a      <= add_a_next;
+      add_b      <= add_b_next;
+      add_sum    <= add_sum_next;
       -----------------------------------
-      sub_a <= sub_a_next;
-      sub_b <= sub_b_next;
-      sub_dif <= sub_dif_next;
+      sub_a      <= sub_a_next;
+      sub_b      <= sub_b_next;
+      sub_dif    <= sub_dif_next;
       -----------------------------------
-      mult_a <= mult_a_next;
-      mult_b <= mult_b_next;
+      mult_a     <= mult_a_next;
+      mult_b     <= mult_b_next;
       mult_reset <= mult_reset_next;
       mult_start <= mult_start_next;
       mult_ready <= mult_ready_next;
-      mult_prd <= mult_prd_next;
+      mult_prd   <= mult_prd_next;
 
     end if;
 
@@ -222,43 +222,43 @@ begin
 
   begin
 
-    -----------------------------------     
+    -----------------------------------
     -- Set state logic signal defaults
-    ----------------------------------- 
-    state_next <= state_reg;
-    ready      <= '0';
     -----------------------------------
-    T1_next <= T1;
-    T2_next <= T2;
-    T3_next <= T3;
-    T4_next <= T4;
+    state_next      <= state_reg;
+    ready           <= '0';
     -----------------------------------
-    x2_next <= x2;
-    y2_next <= y2;
+    T1_next         <= T1;
+    T2_next         <= T2;
+    T3_next         <= T3;
+    T4_next         <= T4;
     -----------------------------------
-    X3_next <= X3_tmp;
-    Y3_next <= Y3_tmp;
-    Z3_next <= Z3_tmp;
+    x2_next         <= x2;
+    y2_next         <= y2;
     -----------------------------------
-    add_a_next <= add_a;
-    add_b_next <= add_b;
-    add_sum_next <= add_sum;
+    X3_next         <= X3_tmp;
+    Y3_next         <= Y3_tmp;
+    Z3_next         <= Z3_tmp;
     -----------------------------------
-    sub_a_next <= sub_a;
-    sub_b_next <= sub_b;
-    sub_dif_next <= sub_dif;
+    add_a_next      <= add_a;
+    add_b_next      <= add_b;
+    add_sum_next    <= add_sum;
     -----------------------------------
-    mult_a_next <= mult_a;
-    mult_b_next <= mult_b;
+    sub_a_next      <= sub_a;
+    sub_b_next      <= sub_b;
+    sub_dif_next    <= sub_dif;
+    -----------------------------------
+    mult_a_next     <= mult_a;
+    mult_b_next     <= mult_b;
     mult_reset_next <= mult_reset;
     mult_start_next <= mult_start;
     mult_ready_next <= mult_ready;
-    mult_prd_next <= mult_prd;
+    mult_prd_next   <= mult_prd;
 
 
-    -----------------------------------     
+    -----------------------------------
     -- STATE LOGIC
-    ----------------------------------- 
+    -----------------------------------
     case (state_reg) is
 
 
@@ -273,17 +273,17 @@ begin
 
       -- sets initial signal value
       when load =>
-        T1_next <= (others => '0');
-        T2_next <= (others => '0');
-        T3_next <= (others => '0');
-        T4_next <= (others => '0');
+        T1_next         <= (others => '0');
+        T2_next         <= (others => '0');
+        T3_next         <= (others => '0');
+        T4_next         <= (others => '0');
         -----------------------------------
-        x2_next <= (others => '0');
-        y2_next <= (others => '0');
+        x2_next         <= (others => '0');
+        y2_next         <= (others => '0');
         -----------------------------------
-        X3_next   <= (others => '0');
-        Y3_next   <= (others => '0');
-        Z3_next   <= (others => '0');
+        X3_next         <= (others => '0');
+        Y3_next         <= (others => '0');
+        Z3_next         <= (others => '0');
         -----------------------------------
         add_a_next      <= (others => '0');
         add_b_next      <= (others => '0');
@@ -303,11 +303,11 @@ begin
         state_next <= check_infty;
 
         --******************************************
-        -- 
+        --
         -- IMPLEMENT POINT ADDITION PROCEDURE
-        -- 
+        --
         --******************************************
-        -- 
+        --
         -- USE:
         --  i) adding new signal for calc process
         --      - declare reg and next for signal
@@ -317,7 +317,7 @@ begin
         --      - if signal is assigned in state handler
         --          - init in reset
         --          - assign signal next to signal reg
-        --  
+        --
         --------------------------------------------
 
       -- TODO: add modulo in  multiply
@@ -351,10 +351,10 @@ begin
 
         state_next <= c3_init;
 
-      when c3_init =>                        -- T1 <= Z1^2
+      when c3_init =>                   -- T1 <= Z1^2
 
-        mult_a_next <= Z1;
-        mult_b_next <= Z1;
+        mult_a_next     <= Z1;
+        mult_b_next     <= Z1;
         mult_reset_next <= '1';
 
         state_next <= c3_start;
@@ -382,10 +382,10 @@ begin
 
         state_next <= c4_init;
 
-      when c4_init =>                        -- T2 <= T1 * Z1
+      when c4_init =>                   -- T2 <= T1 * Z1
 
-        mult_a_next <= T1;
-        mult_b_next <= Z1;
+        mult_a_next     <= T1;
+        mult_b_next     <= Z1;
         mult_reset_next <= '1';
 
         state_next <= c4_start;
@@ -413,10 +413,10 @@ begin
 
         state_next <= c5_init;
 
-      when c5_init =>                        -- T1 = T1 * x2
+      when c5_init =>                   -- T1 = T1 * x2
 
-        mult_a_next <= T1;
-        mult_b_next <= x2;
+        mult_a_next     <= T1;
+        mult_b_next     <= x2;
         mult_reset_next <= '1';
 
         state_next <= c5_start;
@@ -444,10 +444,10 @@ begin
 
         state_next <= c6_init;
 
-      when c6_init =>                        -- T2 = T2 * y2
+      when c6_init =>                   -- T2 = T2 * y2
 
-        mult_a_next <= T2;
-        mult_b_next <= y2;
+        mult_a_next     <= T2;
+        mult_b_next     <= y2;
         mult_reset_next <= '1';
 
         state_next <= c6_start;
@@ -475,7 +475,7 @@ begin
 
         state_next <= c7_init;
 
-      when c7_init =>                        -- T1 = T1 - X1
+      when c7_init =>                   -- T1 = T1 - X1
 
         sub_a_next <= T1;
         sub_b_next <= X1;
@@ -488,7 +488,7 @@ begin
 
         state_next <= c8_init;
 
-      when c8_init =>                        -- T2 = T2 - Y1
+      when c8_init =>                   -- T2 = T2 - Y1
 
         sub_a_next <= T2;
         sub_b_next <= Y1;
@@ -502,7 +502,7 @@ begin
         state_next <= c9;
 
       when c9 =>                        -- if points are equal, double P or
-                                        -- return =>point at infinity
+                          -- return =>point at infinity
         if T1 = (width - 1 downto 0 => '0') then
           -- TODO: write entity doubling and assign values
           if T2 = (width - 1 downto 0 => '0') then
@@ -516,10 +516,10 @@ begin
           state_next <= c10_init;
         end if;
 
-      when c10_init =>                       -- Z3 <= Z1 * T1
+      when c10_init =>                  -- Z3 <= Z1 * T1
 
-        mult_a_next <= Z1;
-        mult_b_next <= T1;
+        mult_a_next     <= Z1;
+        mult_b_next     <= T1;
         mult_reset_next <= '1';
 
         state_next <= c10_start;
@@ -547,10 +547,10 @@ begin
 
         state_next <= c11_init;
 
-      when c11_init =>                       -- T3 <= T1^2
+      when c11_init =>                  -- T3 <= T1^2
 
-        mult_a_next <= T1;
-        mult_b_next <= T1;
+        mult_a_next     <= T1;
+        mult_b_next     <= T1;
         mult_reset_next <= '1';
 
         state_next <= c11_start;
@@ -578,10 +578,10 @@ begin
 
         state_next <= c12_init;
 
-      when c12_init =>                       -- T4 <= T3 * T1
+      when c12_init =>                  -- T4 <= T3 * T1
 
-        mult_a_next <= T3;
-        mult_b_next <= T1;
+        mult_a_next     <= T3;
+        mult_b_next     <= T1;
         mult_reset_next <= '1';
 
         state_next <= c12_start;
@@ -609,10 +609,10 @@ begin
 
         state_next <= c13_init;
 
-      when c13_init =>                       -- T3 <= T3 * X1
+      when c13_init =>                  -- T3 <= T3 * X1
 
-        mult_a_next <= T3;
-        mult_b_next <= X1;
+        mult_a_next     <= T3;
+        mult_b_next     <= X1;
         mult_reset_next <= '1';
 
         state_next <= c13_start;
@@ -640,7 +640,7 @@ begin
 
         state_next <= c14_double;
 
-      when c14_double =>                       -- T1 <= 2 * T3
+      when c14_double =>                -- T1 <= 2 * T3
 
         T1_next <= T3(width - 2 downto 0) & "0";
 
@@ -663,10 +663,10 @@ begin
 
         state_next <= c15_init;
 
-      when c15_init =>                       -- X3 <= T2^2
+      when c15_init =>                  -- X3 <= T2^2
 
-        mult_a_next <= T2;
-        mult_b_next <= T2;
+        mult_a_next     <= T2;
+        mult_b_next     <= T2;
         mult_reset_next <= '1';
 
         state_next <= c15_start;
@@ -694,7 +694,7 @@ begin
 
         state_next <= c16_init;
 
-      when c16_init =>                       -- X3 <= X3 - T1
+      when c16_init =>                  -- X3 <= X3 - T1
 
         sub_a_next <= X3_tmp;
         sub_b_next <= T1;
@@ -707,7 +707,7 @@ begin
 
         state_next <= c17_init;
 
-      when c17_init =>                       -- X3 <= X3 - T4
+      when c17_init =>                  -- X3 <= X3 - T4
 
         sub_a_next <= X3_tmp;
         sub_b_next <= T4;
@@ -721,7 +721,7 @@ begin
         state_next <= c18_init;
 
 
-      when c18_init =>                       -- T3 <= T3 - X3
+      when c18_init =>                  -- T3 <= T3 - X3
 
         sub_a_next <= T3;
         sub_b_next <= X3_tmp;
@@ -734,11 +734,11 @@ begin
 
         state_next <= c19_init;
 
-      when c19_init =>                       -- T3 <= T3 * T2
+      when c19_init =>                  -- T3 <= T3 * T2
 
 
-        mult_a_next <= T3;
-        mult_b_next <= T2;
+        mult_a_next     <= T3;
+        mult_b_next     <= T2;
         mult_reset_next <= '1';
 
         state_next <= c19_start;
@@ -766,10 +766,10 @@ begin
 
         state_next <= c20_init;
 
-      when c20_init =>                       -- T4 <= T4 * Y1
+      when c20_init =>                  -- T4 <= T4 * Y1
 
-        mult_a_next <= T4;
-        mult_b_next <= Y1;
+        mult_a_next     <= T4;
+        mult_b_next     <= Y1;
         mult_reset_next <= '1';
 
         state_next <= c20_start;
@@ -797,7 +797,7 @@ begin
 
         state_next <= c21_init;
 
-      when c21_init =>                       -- Y3 <= T3 - T4
+      when c21_init =>                  -- Y3 <= T3 - T4
 
         sub_a_next <= T3;
         sub_b_next <= T4;
@@ -856,7 +856,7 @@ begin
   -- MULTIPLICATION
   -----------------------------------
   multiply : entity work.modmult (Behavioral)
-    generic map (base    => base,
+    generic map (base  => base,
                  width => width)
     port map (clk   => clk,
               a     => mult_a,
