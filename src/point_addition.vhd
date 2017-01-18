@@ -62,7 +62,7 @@ architecture Behavioral of point_addition is
                    c11_init, c11_start, c11_wait, c11_result,  -- T3 <= T1^2
                    c12_init, c12_start, c12_wait, c12_result,  -- T4 <= T3 * T1
                    c13_init, c13_start, c13_wait, c13_result,  -- T3 <= T3 * X1
-                   c14, c14_init, c14_result,                  -- T1 <= 2 * T3
+                   c14_double, c14_mod, c14_result,            -- T1 <= 2 * T3
                    c15_init, c15_start, c15_wait, c15_result,  -- X3 <= T2^2
                    c16_init, c16_result,                       -- X3 <= X3 - T1
                    c17_init, c17_result,                       -- X3 <= X3 - T4
@@ -303,11 +303,11 @@ begin
         state_next <= check_infty;
 
         --******************************************
-        --
+        -- 
         -- IMPLEMENT POINT ADDITION PROCEDURE
-        --
+        -- 
         --******************************************
-        --
+        -- 
         -- USE:
         --  i) adding new signal for calc process
         --      - declare reg and next for signal
@@ -317,7 +317,7 @@ begin
         --      - if signal is assigned in state handler
         --          - init in reset
         --          - assign signal next to signal reg
-        --
+        --  
         --------------------------------------------
 
       -- TODO: add modulo in  multiply
@@ -638,19 +638,19 @@ begin
 
         T3_next <= mult_prd;
 
-        state_next <= c14;
+        state_next <= c14_double;
 
-      when c14 =>                       -- T1 <= 2 * T3
+      when c14_double =>                       -- T1 <= 2 * T3
 
         T1_next <= T3(width - 2 downto 0) & "0";
 
         if unsigned(T1_next) > unsigned(p192) then
-          state_next <= c14_init;
+          state_next <= c14_mod;
         else
           state_next <= c15_init;
         end if;
 
-      when c14_init =>
+      when c14_mod =>
 
         sub_a_next <= T1;
         sub_b_next <= p192;
