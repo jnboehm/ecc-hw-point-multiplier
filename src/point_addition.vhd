@@ -183,10 +183,6 @@ begin
       x2         <= x2_next;
       y2         <= y2_next;
       -----------------------------------
-      X3         <= X3_next;
-      Y3         <= Y3_next;
-      Z3         <= Z3_next;
-      -----------------------------------
       X3_tmp     <= X3_next;
       Y3_tmp     <= Y3_next;
       Z3_tmp     <= Z3_next;
@@ -820,6 +816,12 @@ begin
 
   end process;
 
+  -- asynchronously copy the values into the out port
+  X3 <= X3_tmp;
+  Y3 <= Y3_tmp;
+  Z3 <= Z3_tmp;
+
+
   --TODO: why?
   -- res <= tmp_res
 
@@ -865,6 +867,5 @@ begin
               start => mult_start,
               ready => mult_ready,      -- assign mult_prd when mult_ready == 1
               prd   => mult_prd);
-
 
 end Behavioral;
