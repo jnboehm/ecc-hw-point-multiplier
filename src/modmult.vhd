@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity modmult is
-  generic(base    : integer := 2;
+  generic(base  : integer := 2;
           width : integer := 4);
 
   port (clk   : in  std_logic;
@@ -56,7 +56,6 @@ begin
       i                    <= 0;
       tmp_prd_mod          <= (others => '0');
       almost_final_tmp_prd <= (others => '0');
-      prd <= (others => '0');
 
     elsif (rising_edge(clk)) then       -- Changes on rising edge
       state_reg   <= state_next;
