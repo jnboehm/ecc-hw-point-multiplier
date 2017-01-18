@@ -193,14 +193,15 @@ begin
       -----------------------------------
       sub_a      <= sub_a_next;
       sub_b      <= sub_b_next;
-      sub_dif    <= sub_dif_next;
+      -- sub_dif    <= sub_dif_next;
       -----------------------------------
       mult_a     <= mult_a_next;
       mult_b     <= mult_b_next;
       mult_reset <= mult_reset_next;
       mult_start <= mult_start_next;
-      mult_ready <= mult_ready_next;
-      mult_prd   <= mult_prd_next;
+      -- remove this _next state;
+      -- mult_ready <= mult_ready_next;
+      -- mult_prd   <= mult_prd_next;
 
     end if;
 
