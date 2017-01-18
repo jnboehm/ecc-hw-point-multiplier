@@ -216,6 +216,8 @@ begin
                        mult_b, mult_prd, mult_ready, mult_reset, mult_start,
                        start, state_reg, sub_a, sub_b, sub_dif, x2, y2)
 
+    variable T1_tmp : std_logic_vector(T1'range);
+
   begin
 
     -----------------------------------
@@ -638,9 +640,10 @@ begin
 
       when c14_double =>                -- T1 <= 2 * T3
 
-        T1_next <= T3(width - 2 downto 0) & "0";
+        T1_tmp := T3(width - 2 downto 0) & "0";
+        T1_next <= T1_tmp;
 
-        if unsigned(T1_next) > unsigned(p192) then
+        if unsigned(T1_tmp) > unsigned(p192) then
           state_next <= c14_mod;
         else
           state_next <= c15_init;
