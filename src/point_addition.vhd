@@ -211,10 +211,10 @@ begin
   -- PROCESS: TRANSITION
   -- DEF: state and signal assignment
   --=================================
-  transition : process(T1, T1_next, T2, T3, T4, X1, X2_p, X3_tmp, Y1, Y2_p,
-                       Y3_tmp, Z1, Z2_p, Z3_tmp, add_a, add_b, add_sum, mult_a,
-                       mult_b, mult_prd, mult_ready, mult_reset, mult_start,
-                       start, state_reg, sub_a, sub_b, sub_dif, x2, y2)
+  transition : process(T1, T2, T3, T4, X1, X2_p, X3_tmp, Y1, Y2_p, Y3_tmp, Z1,
+                       Z2_p, Z3_tmp, add_a, add_b, add_sum, mult_a, mult_b,
+                       mult_prd, mult_ready, mult_reset, mult_start, start,
+                       state_reg, sub_a, sub_b, sub_dif, x2, y2)
 
     variable T1_tmp : std_logic_vector(T1'range);
 
