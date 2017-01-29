@@ -730,7 +730,7 @@ begin
 
       when c18_result =>
 
-        X3_next <= sub_dif;
+        T3_next <= sub_dif;
 
         state_next <= c19_init;
 
