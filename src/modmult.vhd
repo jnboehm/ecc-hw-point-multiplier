@@ -142,7 +142,7 @@ begin
 
   end process;
 
-  prd <= tmp_prd(width - 1 downto 0);
+  prd <= tmp_prd_mod(width - 1 downto 0);
 
   mod_prd : entity work.modp192 (Behavioral)
     generic map (base => base, width => 2 * width)
