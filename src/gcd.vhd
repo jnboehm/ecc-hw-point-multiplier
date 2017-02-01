@@ -34,7 +34,8 @@ architecture Behavioral of gcd is
      y5,                                -- Reset max(u_3, v_3)
      y5_nop,                            -- wait for calculation
      y6_assign,                         -- assign t <- u - v
-     y6);                               -- Subtract
+     y6,                                -- Subtract
+     append_k);                         -- reverse y1
 
   signal state_reg, state_next     : state_t;
   signal k, k_next                 : integer;
@@ -204,19 +205,23 @@ begin  -- architecture Behavioral
         end if;
 
         -- Subtraction has to be done here
-        -- actually revese what we did in y1, we cannot slice with a signal
-        -- (that changes its value).  So basically decrement k by one and
-        -- append a signel zero until k = 0.
+
         if t3 = (t3'range => '0') then
-          if k = 0 then
-            gcd <= u3;
-          else
-            gcd <= u3(u3'left - k downto 0) & (k - 1 downto 0 => '0');
-          end if;
-          state_next <= idle;
-          ready <= '1';
+          state_next <= append_k;
         else
           state_next <= y3;
+        end if;
+
+      when append_k =>
+
+        -- decrement k by one and append a signel zero until k = 0.
+        if k = 0 then
+          gcd <= u3;
+          ready <= '1';
+          state_next <= idle;
+        else
+          gcd <= u3(u3'left - 1 downto 0) & "0";
+          k_next <= k - 1;
         end if;
 
     end case;
