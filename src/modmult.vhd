@@ -69,8 +69,9 @@ begin
 
   end process;
 
-  transition : process(i, line_prd, line_prd_calc, start, state_reg, tmp_prd,
-                       tmp_prd_calc, tmp_prd_mod, tmp_prd_mod_calc)
+  transition : process(almost_final_tmp_prd, i, line_prd, line_prd_calc, start,
+                       state_reg, tmp_prd, tmp_prd_calc, tmp_prd_mod,
+                       tmp_prd_mod_calc)
   begin
     -- Set defaults
     state_next       <= state_reg;
