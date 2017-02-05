@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity inert_in_Z_p192 is
+entity invert_in_Z_p192 is
   generic(base  : integer := 2;
           width : integer := 4);
 
@@ -12,9 +12,9 @@ entity inert_in_Z_p192 is
         start   : in  std_logic;
         ready   : out std_logic;
         reset   : in  std_logic);
-end inert_in_Z_p192;
+end invert_in_Z_p192;
 
-architecture Behavioral of inert_in_Z_p192 is
+architecture Behavioral of invert_in_Z_p192 is
 
   -- the constant p192 as specified by the NIST standard.
   constant p192 : std_logic_vector(width - 1 downto 0) := "000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111111111111111111111111111111111111111111111111111111111";
