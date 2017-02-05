@@ -42,7 +42,7 @@ architecture Behavioral of point_doubling is
                    c3_init, c3_result,                         -- T2 <= X1 - T1
                    c4_init, c4_result,                         -- T1 <= X1 + T1
                    c5_init, c5_start, c5_wait, c5_result,      -- T2 <= T2 * T1
-                   c6_double, c6_mod, c6_add, c6_result,       -- T2 <= 3 * T2
+                   c6_init, c6_start, c6_wait, c6_result,       -- T2 <= 3 * T2
                    c7_double, c7_mod, c7_result,               -- Y3 <= 2 * Y1
                    c8_init, c8_start, c8_wait, c8_result,      -- Z3 <= Y3 * Z1
                    c9_init, c9_start, c9_wait, c9_result,      -- Y3 <= Y3^2
@@ -361,38 +361,36 @@ begin
 
         T2_next <= mult_prd;
 
-        state_next <= c6_double;
+        state_next <= c6_init;
 
+      when c6_init =>                  -- T2 <= 3 * T2
 
-      when c6_double =>                 -- T2 <= 3 * T2
+        mult_a_next     <= (1 downto 0 => '1', others => '0');
+        mult_b_next     <= T2;
+        mult_reset_next <= '1';
 
+        state_next <= c6_start;
 
-        T2_next <= T2(width - 2 downto 0) & "0";
+      when c6_start =>
 
-        if unsigned(T2_next) > unsigned(p192) then
-          state_next <= c6_mod;
+        mult_reset_next <= '0';
+        mult_start_next <= '1';
+
+        state_next <= c6_wait;
+
+      when c6_wait =>
+
+        mult_start_next <= '0';
+
+        if mult_ready = '1' then
+          state_next <= c6_result;
         else
-          state_next <= c6_add;
+          state_next <= c6_wait;
         end if;
-
-        state_next <= c6_mod;
-
-      when c6_mod =>
-
-        sub_a_next <= T2;
-        sub_b_next <= p192;
-
-        state_next <= c6_add;
-
-      when c6_add =>
-
-        add_a_next <= sub_dif;
-        add_b_next <= T2;
-        state_next <= c6_result;
 
       when c6_result =>
 
-        T2_next <= add_sum;
+        T2_next <= mult_prd;
 
         state_next <= c7_double;
 
