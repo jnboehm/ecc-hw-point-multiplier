@@ -35,7 +35,8 @@ architecture Behavioral of gcd is
      y5_nop,                            -- wait for calculation
      y6_assign,                         -- assign t <- u - v
      y6,                                -- Subtract
-     append_k);                         -- reverse y1
+     append_k,                          -- reverse y1
+     output);
 
   signal state_reg, state_next     : state_t;
   signal k, k_next                 : integer;
@@ -217,12 +218,15 @@ begin  -- architecture Behavioral
         -- decrement k by one and append a signel zero until k = 0.
         if k = 0 then
           gcd <= u3;
-          ready <= '1';
-          state_next <= idle;
+          state_next <= output;
         else
           gcd <= u3(u3'left - 1 downto 0) & "0";
           k_next <= k - 1;
         end if;
+
+      when output =>
+        ready <= '1';
+        state_next <= idle;
 
     end case;
   end process transition;
