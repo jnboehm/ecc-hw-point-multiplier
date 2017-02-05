@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="rdaa_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="rdaa" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="435000001fs"></ZoomEndTime>
+      <Cursor1Time time="285000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
+      <ValueColumnWidth column_width="373"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="13" />
+   <wvobject type="array" fp_name="/rdaa/uut/x1">
+      <obj_property name="ElementShortName">x1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">x1[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/y1">
+      <obj_property name="ElementShortName">y1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">y1[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/k">
+      <obj_property name="ElementShortName">k[3:0]</obj_property>
+      <obj_property name="ObjectShortName">k[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/rdaa/uut/i">
+      <obj_property name="ElementShortName">i</obj_property>
+      <obj_property name="ObjectShortName">i</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/rdaa/uut/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/X2">
+      <obj_property name="ElementShortName">X2[197:0]</obj_property>
+      <obj_property name="ObjectShortName">X2[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/Y2">
+      <obj_property name="ElementShortName">Y2[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Y2[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/Z2">
+      <obj_property name="ElementShortName">Z2[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Z2[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/x_affine">
+      <obj_property name="ElementShortName">x_affine[197:0]</obj_property>
+      <obj_property name="ObjectShortName">x_affine[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/y_affine">
+      <obj_property name="ElementShortName">y_affine[197:0]</obj_property>
+      <obj_property name="ObjectShortName">y_affine[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/rdaa/uut/converter/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/rdaa/uut/converter/inverter/inverter/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/rdaa/uut/converter/inverter/inverter/ratio_u">
+      <obj_property name="ElementShortName">ratio_u[197:0]</obj_property>
+      <obj_property name="ObjectShortName">ratio_u[197:0]</obj_property>
+   </wvobject>
+</wave_config>
