@@ -13,14 +13,9 @@ entity point_addition is
         X1    : in  std_logic_vector(width - 1 downto 0);
         Y1    : in  std_logic_vector(width - 1 downto 0);
         Z1    : in  std_logic_vector(width - 1 downto 0);
-        -- second point in projective coordinates.  The original algorithm
-        -- specifies that Q (the second point) is in affine coordinates but
-        -- there is no represenetation for the point at infinity in this
-        -- represenetation, hence we use projective coordinates here, too, and
-        -- convert Q to affine coordinates if need be.
-        X2_p  : in  std_logic_vector(width - 1 downto 0);
-        Y2_p  : in  std_logic_vector(width - 1 downto 0);
-        Z2_p  : in  std_logic_vector(width - 1 downto 0);
+        -- second point in affine coordinates.
+        x2  : in  std_logic_vector(width - 1 downto 0);
+        y2  : in  std_logic_vector(width - 1 downto 0);
         -- result in projective coordinates.
         X3    : out std_logic_vector(width - 1 downto 0);
         Y3    : out std_logic_vector(width - 1 downto 0);
@@ -46,8 +41,6 @@ architecture Behavioral of point_addition is
   type state_t is (idle,
                    load,
                    check_infty,
-                   convert_q,
-
                    -- c and a number correspond to the number in the algorithm
                    -- specified above (3.22).
                    c3_init, c3_start, c3_wait, c3_result,      -- T1 <= Z1^2
@@ -83,9 +76,6 @@ architecture Behavioral of point_addition is
   signal T3     : std_logic_vector(width - 1 downto 0);
   signal T4     : std_logic_vector(width - 1 downto 0);
   -----------------------------------
-  signal x2     : std_logic_vector(width - 1 downto 0);
-  signal y2     : std_logic_vector(width - 1 downto 0);
-  -----------------------------------
   signal X3_tmp : std_logic_vector(width - 1 downto 0);
   signal Y3_tmp : std_logic_vector(width - 1 downto 0);
   signal Z3_tmp : std_logic_vector(width - 1 downto 0);
@@ -97,9 +87,6 @@ architecture Behavioral of point_addition is
   signal T2_next         : std_logic_vector(width - 1 downto 0);
   signal T3_next         : std_logic_vector(width - 1 downto 0);
   signal T4_next         : std_logic_vector(width - 1 downto 0);
-  -----------------------------------
-  signal x2_next         : std_logic_vector(width - 1 downto 0);
-  signal y2_next         : std_logic_vector(width - 1 downto 0);
   -----------------------------------
   signal X3_next         : std_logic_vector(width - 1 downto 0);
   signal Y3_next         : std_logic_vector(width - 1 downto 0);
@@ -162,9 +149,6 @@ begin
       T3        <= (others => '0');
       T4        <= (others => '0');
       -----------------------------------
-      x2        <= (others => '0');
-      y2        <= (others => '0');
-      -----------------------------------
       X3_tmp    <= (others => '0');
       Y3_tmp    <= (others => '0');
       Z3_tmp    <= (others => '0');
@@ -179,9 +163,6 @@ begin
       T2         <= T2_next;
       T3         <= T3_next;
       T4         <= T4_next;
-      -----------------------------------
-      x2         <= x2_next;
-      y2         <= y2_next;
       -----------------------------------
       X3_tmp     <= X3_next;
       Y3_tmp     <= Y3_next;
@@ -199,9 +180,6 @@ begin
       mult_b     <= mult_b_next;
       mult_reset <= mult_reset_next;
       mult_start <= mult_start_next;
-      -- remove this _next state;
-      -- mult_ready <= mult_ready_next;
-      -- mult_prd   <= mult_prd_next;
 
     end if;
 
@@ -212,10 +190,10 @@ begin
   -- PROCESS: TRANSITION
   -- DEF: state and signal assignment
   --=================================
-  transition : process(T1, T2, T3, T4, X1, X2_p, X3_tmp, Y1, Y2_p, Y3_tmp, Z1,
-                       Z2_p, Z3_tmp, add_a, add_b, add_sum, mult_a, mult_b,
-                       mult_prd, mult_ready, mult_reset, mult_start, start,
-                       state_reg, sub_a, sub_b, sub_dif, x2, y2)
+  transition : process(T1, T2, T3, T4, X1, X3_tmp, Y1, Y3_tmp, Z1, Z3_tmp,
+                       add_a, add_b, add_sum, mult_a, mult_b, mult_prd,
+                       mult_ready, mult_reset, mult_start, start, state_reg,
+                       sub_a, sub_b, sub_dif, x2, y2)
 
     variable T1_tmp : std_logic_vector(T1'range);
 
@@ -231,9 +209,6 @@ begin
     T2_next         <= T2;
     T3_next         <= T3;
     T4_next         <= T4;
-    -----------------------------------
-    x2_next         <= x2;
-    y2_next         <= y2;
     -----------------------------------
     X3_next         <= X3_tmp;
     Y3_next         <= Y3_tmp;
@@ -276,9 +251,6 @@ begin
         T2_next         <= (others => '0');
         T3_next         <= (others => '0');
         T4_next         <= (others => '0');
-        -----------------------------------
-        x2_next         <= (others => '0');
-        y2_next         <= (others => '0');
         -----------------------------------
         X3_next         <= (others => '0');
         Y3_next         <= (others => '0');
@@ -323,32 +295,21 @@ begin
       -- if either one of the points is the point at infinity, then return the other one as teh result
       when check_infty =>
 
-        if Z2_p = (width - 1 downto 0 => '0') then
+        if x2 = (width - 1 downto 0 => '0') and y2 = (width - 1 downto 0 => '0') then
           X3_next <= X1;
           Y3_next <= Y1;
           Z3_next <= Z1;
 
           state_next <= output;
         elsif Z1 = (width - 1 downto 0 => '0') then
-          X3_next <= X2_p;
-          Y3_next <= Y2_p;
-          Z3_next <= Z2_p;
+          X3_next <= x2;
+          Y3_next <= y2;
+          Z3_next <= (0  => '1', others => '0');
 
           state_next <= output;
         else
-          state_next <= convert_q;
+          state_next <= c3_init;
         end if;
-
-
-      -- assume that Z2 is always '1' xor '0' so convert q is basically copying
-      -- the values of X2, Y2 to x2, y2
-      --
-      -- TODO: ask Reith about the point at inifinity for affine coordinates.
-      when convert_q =>
-        x2_next <= X2_p;
-        y2_next <= Y2_p;
-
-        state_next <= c3_init;
 
       when c3_init =>                   -- T1 <= Z1^2
 
@@ -501,7 +462,7 @@ begin
         state_next <= c9;
 
       when c9 =>                        -- if points are equal, double P or
-                          -- return =>point at infinity
+                                        -- return =>point at infinity
         if T1 = (width - 1 downto 0 => '0') then
           -- TODO: write entity doubling and assign values
           if T2 = (width - 1 downto 0 => '0') then
