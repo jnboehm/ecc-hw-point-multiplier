@@ -22,8 +22,8 @@ architecture Behavioral of modp192 is
 
   -- the variables as defined in the algorithm 2.27 in "Guide to Elliptic Curve
   -- Cryptography" by Darrel Hankerson (2004).
-  signal c0, c1, c2, c3, c4, c5         : std_logic_vector(63 downto 0);
-  signal s1, s2, s3, s4                 : std_logic_vector(internal_width - 1 downto 0);
+  signal c0, c1, c2, c3, c4, c5 : std_logic_vector(63 downto 0);
+  signal s1, s2, s3, s4         : std_logic_vector(internal_width - 1 downto 0);
 
   -- to prevent simultaneous writing to a signal we define multiple
   -- temp signals.  The modulo reduction is performed in a
@@ -34,10 +34,10 @@ architecture Behavioral of modp192 is
 
   -- calculate (s*_tmp - p192) and save.  It is only used when (s*_tmp > p192).
   -- No time is lost by calculation.
-  signal s1_sub, s2_sub, s3_sub         : std_logic_vector(internal_width - 1 downto 0);
+  signal s1_sub, s2_sub, s3_sub : std_logic_vector(internal_width - 1 downto 0);
 
   -- carries the modulo reduced intermediate value.
-  signal s1_mod, s2_mod, s3_mod         : std_logic_vector(internal_width - 1 downto 0);
+  signal s1_mod, s2_mod, s3_mod : std_logic_vector(internal_width - 1 downto 0);
 
   -- a constant for filling up the s* signals, to resolve alignment
   -- issues.
@@ -53,7 +53,7 @@ begin
   c5 <= c(383 downto 320);
 
   s1 <= zeros & c2 & c1 & c0;
-  s2 <= zeros & (63 downto 0 => '0') & c3 & c3;
+  s2 <= zeros & (63 downto 0           => '0') & c3 & c3;
   s3 <= zeros & c4 & c4 & (63 downto 0 => '0');
   s4 <= zeros & c5 & c5 & c5;
 
@@ -69,7 +69,7 @@ begin
 
   sub1 : entity work.subtraction (Behavioral)
     generic map (base  => base,
-                 width =>internal_width)
+                 width => internal_width)
     port map(a   => s1_tmp,
              b   => std_logic_vector(p192),
              cin => '0',
