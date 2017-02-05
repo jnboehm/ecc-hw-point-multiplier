@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity point_doubling is
 
-  generic(base  : integer := 2;
-          width : integer := 4);
+  generic(base  : integer := 18;
+          width : integer := 198);
 
   port (clk   : in  std_logic;
         X1    : in  std_logic_vector(width - 1 downto 0);
@@ -35,7 +35,6 @@ architecture Behavioral of point_doubling is
   type state_t is (idle,
                    load,
                    check_infty,
-
                    -- c and a number correspond to the number in the algorithm
                    -- specified above (3.22).
                    c2_init, c2_start, c2_wait, c2_result,      -- T1 <= Z1^2
@@ -48,7 +47,7 @@ architecture Behavioral of point_doubling is
                    c9_init, c9_start, c9_wait, c9_result,      -- Y3 <= Y3^2
                    c10_init, c10_start, c10_wait, c10_result,  -- T3 <= Y3 * X1
                    c11_init, c11_start, c11_wait, c11_result,  -- Y3 <= Y3^2
-                   c12_prepare, c12_result, c12_devide,        -- Y3 <= Y3/2
+                   c12,                                        -- Y3 <= Y3/2
                    c13_init, c13_start, c13_wait, c13_result,  -- X3 <= T2^2
                    c14_double, c14_mod, c14_result,            -- T1 <= 2 * T3
                    c15_init, c15_result,                       -- X3 <= X3 - T1
@@ -84,18 +83,14 @@ architecture Behavioral of point_doubling is
   -----------------------------------
   signal add_a_next      : std_logic_vector(width - 1 downto 0);
   signal add_b_next      : std_logic_vector(width - 1 downto 0);
-  signal add_sum_next    : std_logic_vector(width - 1 downto 0);
   -----------------------------------
   signal sub_a_next      : std_logic_vector(width - 1 downto 0);
   signal sub_b_next      : std_logic_vector(width - 1 downto 0);
-  signal sub_dif_next    : std_logic_vector(width - 1 downto 0);
   -----------------------------------
   signal mult_a_next     : std_logic_vector(width - 1 downto 0);
   signal mult_b_next     : std_logic_vector(width - 1 downto 0);
   signal mult_reset_next : std_logic;
   signal mult_start_next : std_logic;
-  signal mult_ready_next : std_logic;
-  signal mult_prd_next   : std_logic_vector(width - 1 downto 0);
 
   -----------------------------------
   -- function signals
@@ -163,18 +158,14 @@ begin
       -----------------------------------
       add_a      <= add_a_next;
       add_b      <= add_b_next;
-      add_sum    <= add_sum_next;
       -----------------------------------
       sub_a      <= sub_a_next;
       sub_b      <= sub_b_next;
-      sub_dif    <= sub_dif_next;
       -----------------------------------
       mult_a     <= mult_a_next;
       mult_b     <= mult_b_next;
       mult_reset <= mult_reset_next;
       mult_start <= mult_start_next;
-      mult_ready <= mult_ready_next;
-      mult_prd   <= mult_prd_next;
 
     end if;
 
@@ -189,6 +180,9 @@ begin
                        Y3_tmp, Z1, Z3_tmp, add_a, add_b, add_sum, mult_a,
                        mult_b, mult_prd, mult_ready, mult_reset, mult_start,
                        start, state_reg, sub_a, sub_b, sub_dif)
+
+    variable Y3_var : std_logic_vector(width - 1 downto 0);
+    variable T1_var : std_logic_vector(width - 1 downto 0);
 
   begin
 
@@ -208,18 +202,14 @@ begin
     -----------------------------------
     add_a_next      <= add_a;
     add_b_next      <= add_b;
-    add_sum_next    <= add_sum;
     -----------------------------------
     sub_a_next      <= sub_a;
     sub_b_next      <= sub_b;
-    sub_dif_next    <= sub_dif;
     -----------------------------------
     mult_a_next     <= mult_a;
     mult_b_next     <= mult_b;
     mult_reset_next <= mult_reset;
     mult_start_next <= mult_start;
-    mult_ready_next <= mult_ready;
-    mult_prd_next   <= mult_prd;
 
     -----------------------------------
     -- STATE LOGIC
@@ -241,9 +231,7 @@ begin
 
         -- set in case logic assigned values to init value
 
-        -- state_next <= NEXT_CASE;
-
-
+        state_next <= check_infty;
       -- when NEXT_CASE =>
       --TODO: HOw do I return Infitiy
       -- if either one of the points is the point at infinity, then return the other one as teh result
@@ -319,7 +307,7 @@ begin
 
         state_next <= c4_init;
 
-      when c4_init =>
+      when c4_init =>                   -- T1 <= X1 + T1
 
         add_a_next <= X1;
         add_b_next <= T1;
@@ -394,17 +382,17 @@ begin
 
         state_next <= c7_double;
 
+
       when c7_double =>                 -- Y3 <= 2 * Y1
 
-        Y3_next <= Y1(width - 2 downto 0) & "0";
+        Y3_var := Y1(width - 2 downto 0) & "0";
+        Y3_next <= Y3_var;
 
-        if unsigned(Y3_next) > unsigned(p192) then
+        if unsigned(Y3_var) > unsigned(p192) then
           state_next <= c7_mod;
         else
           state_next <= c8_init;
         end if;
-
-        state_next <= c7_mod;
 
       when c7_mod =>
 
@@ -449,7 +437,6 @@ begin
         Z3_next <= mult_prd;
 
         state_next <= c9_init;
-
 
       when c9_init =>                   -- Y3 <= Y3^2
 
@@ -511,7 +498,7 @@ begin
 
         T3_next <= mult_prd;
 
-        state_next <= c10_init;
+        state_next <= c11_init;
 
       when c11_init =>                  -- Y3 <= Y3^2
 
@@ -542,29 +529,11 @@ begin
 
         Y3_next <= mult_prd;
 
-        state_next <= c12_prepare;
+        state_next <= c12;
 
-      when c12_prepare =>               -- Y3 <= Y3/2
+      when c12 =>                       -- Y3 <= Y3/2
 
-        if Y3_tmp(Y3_tmp'low) = '1' then
-
-          add_a_next <= (width - 1 downto 1 => '0') & "1";
-          add_b_next <= Y3_tmp;
-
-          state_next <= c12_result;
-        else
-          state_next <= c12_result;
-        end if;
-
-      when c12_result =>
-
-        Y3_next <= add_sum;
-
-        state_next <= c12_devide;
-
-      when c12_devide =>
-
-        Y3_next <= "0" & Y3_tmp(width - 1 downto 1);
+        Y3_next <= Y3_tmp(Y3_tmp'high) & Y3_tmp(width - 1 downto 1);
 
         state_next <= c13_init;
 
@@ -599,18 +568,16 @@ begin
 
         state_next <= c14_double;
 
-
       when c14_double =>                -- T1 <= 2 * T3
 
-        T1_next <= T3(width - 2 downto 0) & "0";
+        T1_var := T3(width - 2 downto 0) & "0";
+        T1_next <= T1_var;
 
-        if unsigned(Y3_next) > unsigned(p192) then
+        if unsigned(T1_var) > unsigned(p192) then
           state_next <= c14_mod;
         else
           state_next <= c15_init;
         end if;
-
-        state_next <= c14_mod;
 
       when c14_mod =>
 
@@ -624,7 +591,6 @@ begin
         T1_next <= sub_dif;
 
         state_next <= c15_init;
-
 
       when c15_init =>                  -- X3 <= X3 - T1
 
@@ -683,7 +649,6 @@ begin
 
         state_next <= c18_init;
 
-
       when c18_init =>                  -- Y3 <= T1 - Y3
 
         sub_a_next <= T1;
@@ -696,7 +661,6 @@ begin
         Y3_next <= sub_dif;
 
         state_next <= output;
-
 
       -- signals finished calculation
       when output =>
@@ -732,7 +696,7 @@ begin
   -----------------------------------
   -- SUBTRACTION
   -----------------------------------
-  subtract : entity work.subtraction (Behavioral)
+  subtract : entity work.submod (Behavioral)
     generic map (base  => base,
                  width => width)
     port map (a   => sub_a,
@@ -753,7 +717,5 @@ begin
               start => mult_start,
               ready => mult_ready,      -- assign mult_prd when mult_ready == 1
               prd   => mult_prd);
-
-
 
 end Behavioral;
