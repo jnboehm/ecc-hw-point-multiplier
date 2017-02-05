@@ -811,7 +811,7 @@ begin
   -----------------------------------
   -- SUBTRACTION
   -----------------------------------
-  subtract : entity work.subtraction (Behavioral)
+  subtract : entity work.submod (Behavioral)
     generic map (base  => base,
                  width => width)
     port map (a   => sub_a,
@@ -832,5 +832,6 @@ begin
               start => mult_start,
               ready => mult_ready,      -- assign mult_prd when mult_ready == 1
               prd   => mult_prd);
+
 
 end Behavioral;
