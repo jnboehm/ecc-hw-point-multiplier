@@ -10,121 +10,60 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="873238606fs"></ZoomStartTime>
-      <ZoomEndTime time="1025352279fs"></ZoomEndTime>
-      <Cursor1Time time="1000000000fs"></Cursor1Time>
+      <ZoomStartTime time="294998805fs"></ZoomStartTime>
+      <ZoomEndTime time="295005976fs"></ZoomEndTime>
+      <Cursor1Time time="295000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="163"></NameColumnWidth>
-      <ValueColumnWidth column_width="154"></ValueColumnWidth>
+      <ValueColumnWidth column_width="91"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="23" />
+   <WVObjectSize size="10" />
    <wvobject type="logic" fp_name="/gcd_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
+   <wvobject type="other" fp_name="/gcd_tb/uut/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/gcd_tb/gcd_res">
       <obj_property name="ElementShortName">gcd_res[395:0]</obj_property>
       <obj_property name="ObjectShortName">gcd_res[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/u_in">
-      <obj_property name="ElementShortName">u_in[395:0]</obj_property>
-      <obj_property name="ObjectShortName">u_in[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/v_in">
-      <obj_property name="ElementShortName">v_in[395:0]</obj_property>
-      <obj_property name="ObjectShortName">v_in[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject type="other" fp_name="/gcd_tb/uut/k">
+      <obj_property name="ElementShortName">k</obj_property>
+      <obj_property name="ObjectShortName">k</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/gcd_tb/r_u">
       <obj_property name="ElementShortName">r_u[395:0]</obj_property>
       <obj_property name="ObjectShortName">r_u[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/gcd_tb/r_v">
       <obj_property name="ElementShortName">r_v[395:0]</obj_property>
       <obj_property name="ObjectShortName">r_v[395:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/gcd_tb/uut/state_reg">
-      <obj_property name="ElementShortName">state_reg</obj_property>
-      <obj_property name="ObjectShortName">state_reg</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/gcd_tb/uut/state_next">
-      <obj_property name="ElementShortName">state_next</obj_property>
-      <obj_property name="ObjectShortName">state_next</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/gcd_tb/uut/u">
       <obj_property name="ElementShortName">u[395:0]</obj_property>
       <obj_property name="ObjectShortName">u[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/gcd_tb/uut/v">
       <obj_property name="ElementShortName">v[395:0]</obj_property>
       <obj_property name="ObjectShortName">v[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/gcd_tb/uut/k">
-      <obj_property name="ElementShortName">k</obj_property>
-      <obj_property name="ObjectShortName">k</obj_property>
+   <wvobject type="array" fp_name="/gcd_tb/uut/ratio_u">
+      <obj_property name="ElementShortName">ratio_u[395:0]</obj_property>
+      <obj_property name="ObjectShortName">ratio_u[395:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/gcd_tb/uut/u1">
       <obj_property name="ElementShortName">u1[395:0]</obj_property>
       <obj_property name="ObjectShortName">u1[395:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/u2">
-      <obj_property name="ElementShortName">u2[395:0]</obj_property>
-      <obj_property name="ObjectShortName">u2[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/u3">
-      <obj_property name="ElementShortName">u3[395:0]</obj_property>
-      <obj_property name="ObjectShortName">u3[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/v1">
-      <obj_property name="ElementShortName">v1[395:0]</obj_property>
-      <obj_property name="ObjectShortName">v1[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/v2">
-      <obj_property name="ElementShortName">v2[395:0]</obj_property>
-      <obj_property name="ObjectShortName">v2[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/v3">
-      <obj_property name="ElementShortName">v3[395:0]</obj_property>
-      <obj_property name="ObjectShortName">v3[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/t1">
-      <obj_property name="ElementShortName">t1[395:0]</obj_property>
-      <obj_property name="ObjectShortName">t1[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/t2">
-      <obj_property name="ElementShortName">t2[395:0]</obj_property>
-      <obj_property name="ObjectShortName">t2[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/gcd_tb/uut/t3">
-      <obj_property name="ElementShortName">t3[395:0]</obj_property>
-      <obj_property name="ObjectShortName">t3[395:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/gcd_tb/reset">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/gcd_tb/start">
-      <obj_property name="ElementShortName">start</obj_property>
-      <obj_property name="ObjectShortName">start</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/gcd_tb/ready">
-      <obj_property name="ElementShortName">ready</obj_property>
-      <obj_property name="ObjectShortName">ready</obj_property>
    </wvobject>
 </wave_config>

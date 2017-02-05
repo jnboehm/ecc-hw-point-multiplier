@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="638597141fs"></ZoomStartTime>
-      <ZoomEndTime time="1072280572fs"></ZoomEndTime>
+      <ZoomStartTime time="661253895fs"></ZoomStartTime>
+      <ZoomEndTime time="1067749221fs"></ZoomEndTime>
       <Cursor1Time time="1000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="163"></NameColumnWidth>
-      <ValueColumnWidth column_width="622"></ValueColumnWidth>
+      <ValueColumnWidth column_width="410"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="15" />
    <wvobject type="array" fp_name="/mod_tb/c">
       <obj_property name="ElementShortName">c[395:0]</obj_property>
       <obj_property name="ObjectShortName">c[395:0]</obj_property>
@@ -75,5 +75,9 @@
    <wvobject type="array" fp_name="/mod_tb/uut/res">
       <obj_property name="ElementShortName">res[191:0]</obj_property>
       <obj_property name="ObjectShortName">res[191:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mod_tb/uut/p192">
+      <obj_property name="ElementShortName">p192[197:0]</obj_property>
+      <obj_property name="ObjectShortName">p192[197:0]</obj_property>
    </wvobject>
 </wave_config>

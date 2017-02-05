@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="p_to_a_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="p_to_a_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="15616666666fs"></ZoomStartTime>
+      <ZoomEndTime time="22076666667fs"></ZoomEndTime>
+      <Cursor1Time time="21000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
+      <ValueColumnWidth column_width="364"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="18" />
+   <wvobject type="logic" fp_name="/p_to_a_tb/uut/ready">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/uut/X3">
+      <obj_property name="ElementShortName">X3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">X3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/uut/Y3">
+      <obj_property name="ElementShortName">Y3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Y3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/uut/Z3">
+      <obj_property name="ElementShortName">Z3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Z3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/p_to_a_tb/convert/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/p_to_a_tb/convert/start">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/p_to_a_tb/convert/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/inv_z">
+      <obj_property name="ElementShortName">inv_z[197:0]</obj_property>
+      <obj_property name="ObjectShortName">inv_z[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/inverter/inverter/u_in">
+      <obj_property name="ElementShortName">u_in[197:0]</obj_property>
+      <obj_property name="ObjectShortName">u_in[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/p_to_a_tb/convert/inverter/inverter/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/inverter/inverter/u1">
+      <obj_property name="ElementShortName">u1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">u1[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/inverter/inverter/ratio_u">
+      <obj_property name="ElementShortName">ratio_u[197:0]</obj_property>
+      <obj_property name="ObjectShortName">ratio_u[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/p_to_a_tb/convert/mult/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/mult/prd">
+      <obj_property name="ElementShortName">prd[197:0]</obj_property>
+      <obj_property name="ObjectShortName">prd[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/inv_z_sq">
+      <obj_property name="ElementShortName">inv_z_sq[197:0]</obj_property>
+      <obj_property name="ObjectShortName">inv_z_sq[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/inv_z_cb">
+      <obj_property name="ElementShortName">inv_z_cb[197:0]</obj_property>
+      <obj_property name="ObjectShortName">inv_z_cb[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/x_affine">
+      <obj_property name="ElementShortName">x_affine[197:0]</obj_property>
+      <obj_property name="ObjectShortName">x_affine[197:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_to_a_tb/convert/y_affine">
+      <obj_property name="ElementShortName">y_affine[197:0]</obj_property>
+      <obj_property name="ObjectShortName">y_affine[197:0]</obj_property>
+   </wvobject>
+</wave_config>

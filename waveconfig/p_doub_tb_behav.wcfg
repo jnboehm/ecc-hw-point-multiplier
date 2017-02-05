@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="p_doub_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="p_doub_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="5968250000fs"></ZoomStartTime>
+      <ZoomEndTime time="6006350001fs"></ZoomEndTime>
+      <Cursor1Time time="6000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
+      <ValueColumnWidth column_width="427"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/p_doub_tb/start">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/p_doub_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/p_doub_tb/ready">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/p_doub_tb/uut/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/X1">
+      <obj_property name="ElementShortName">X1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">X1[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/Y1">
+      <obj_property name="ElementShortName">Y1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Y1[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/Z1">
+      <obj_property name="ElementShortName">Z1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Z1[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/uut/T1">
+      <obj_property name="ElementShortName">T1[197:0]</obj_property>
+      <obj_property name="ObjectShortName">T1[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/uut/T2">
+      <obj_property name="ElementShortName">T2[197:0]</obj_property>
+      <obj_property name="ObjectShortName">T2[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/uut/T3">
+      <obj_property name="ElementShortName">T3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">T3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/X3">
+      <obj_property name="ElementShortName">X3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">X3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/Y3">
+      <obj_property name="ElementShortName">Y3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Y3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/Z3">
+      <obj_property name="ElementShortName">Z3[197:0]</obj_property>
+      <obj_property name="ObjectShortName">Z3[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/p_doub_tb/uut/multiply/mod_prd/p192">
+      <obj_property name="ElementShortName">p192[197:0]</obj_property>
+      <obj_property name="ObjectShortName">p192[197:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>
