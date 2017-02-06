@@ -31,7 +31,6 @@ architecture Behavioral of rep_doub_and_add is
                    double_init, double_begin, double_wait, double_result,
                    check_add,
                    add_init, add_begin, add_wait, add_result,
-                   conv_init, conv_begin, conv_wait, conv_result,
                    check,
                    output);
 
@@ -49,7 +48,6 @@ architecture Behavioral of rep_doub_and_add is
   -----------------------------------
   signal double_start, double_ready, double_reset : std_logic;
   signal add_start, add_ready, add_reset          : std_logic;
-  signal conv_start, conv_ready, conv_reset       : std_logic;
 
   -----------------------------------
   -- next signal
@@ -62,7 +60,6 @@ architecture Behavioral of rep_doub_and_add is
   -----------------------------------
   signal double_start_next, double_reset_next : std_logic;
   signal add_start_next, add_reset_next       : std_logic;
-  signal conv_start_next, conv_reset_next     : std_logic;
 
   -----------------------------------
   -- calc signal
@@ -73,8 +70,7 @@ architecture Behavioral of rep_doub_and_add is
   signal X2_calc_double : std_logic_vector(width - 1 downto 0);
   signal Y2_calc_double : std_logic_vector(width - 1 downto 0);
   signal Z2_calc_double : std_logic_vector(width - 1 downto 0);
-  signal x_affine : std_logic_vector(width - 1 downto 0);
-  signal y_affine : std_logic_vector(width - 1 downto 0);
+
 
 
 begin
@@ -114,8 +110,6 @@ begin
       double_reset <= double_reset_next;
       add_start    <= add_start_next;
       add_reset    <= add_reset_next;
-      conv_start    <= conv_start_next;
-      conv_reset    <= conv_reset_next;
 
     end if;
 
@@ -196,7 +190,7 @@ begin
         if k(i) = '1' then
           state_next <= add_init;
         else
-          state_next <= conv_init;
+          state_next <= check;
         end if;
 
       when add_init =>
@@ -224,34 +218,6 @@ begin
         X2_next <= X2_calc;
         Y2_next <= Y2_calc;
         Z2_next <= Z2_calc;
-
-        state_next <= conv_init;
-
-      when conv_init =>
-        conv_reset_next <= '1';
-
-        state_next <= conv_begin;
-
-      when conv_begin =>
-        conv_start_next <= '1';
-        conv_reset_next <= '0';
-
-        state_next <= conv_wait;
-
-      when conv_wait =>
-
-        conv_start_next <= '0';
-
-        if conv_ready = '1' then
-          state_next <= conv_result;
-        else
-          state_next <= conv_wait;
-        end if;
-
-      when conv_result =>
-        X2_next <= x_affine;
-        Y2_next <= y_affine;
-        Z2_next <= (0 => '1', others => '0');
 
         state_next <= check;
 
@@ -311,19 +277,6 @@ begin
               start => add_start,
               ready => add_ready,
               reset => add_reset);
-
-  converter : entity work.projtoaffine (Behavioral)
-    generic map (base  => base,
-                 width => width)
-    port map (clk   => clk,
-              X_in    => X2,
-              Y_in    => Y2,
-              Z_in    => Z2,
-              x_affine    => x_affine,
-              y_affine    => y_affine,
-              start => conv_start,
-              ready => conv_ready,
-              reset => conv_reset);
 
 
 end Behavioral;
