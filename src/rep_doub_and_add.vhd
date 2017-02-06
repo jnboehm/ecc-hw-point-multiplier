@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity rep_doub_and_add is
   generic (base  : integer := 18;
            width : integer := 198;
-           k_width : integer := 2);
+           k_width : integer := 32);
 
   port (clk   : in  std_logic;
         x1    : in  std_logic_vector(width - 1 downto 0);
