@@ -47,7 +47,7 @@ architecture Behavioral of point_doubling is
                    c9_init, c9_start, c9_wait, c9_result,      -- Y3 <= Y3^2
                    c10_init, c10_start, c10_wait, c10_result,  -- T3 <= Y3 * X1
                    c11_init, c11_start, c11_wait, c11_result,  -- Y3 <= Y3^2
-                   c12,                                        -- Y3 <= Y3/2
+                   c12_init, c12_start, c12_wait, c12_result,  -- Y3 <= Y3/2
                    c13_init, c13_start, c13_wait, c13_result,  -- X3 <= T2^2
                    c14_double, c14_mod, c14_result,            -- T1 <= 2 * T3
                    c15_init, c15_result,                       -- X3 <= X3 - T1
@@ -113,6 +113,8 @@ architecture Behavioral of point_doubling is
   -- the constant p192 as specified by the NIST standard.
   constant p192 : std_logic_vector(width - 1 downto 0) := "000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111111111111111111111111111111111111111111111111111111111";
 
+  -- for "halving" in c12
+  constant inverse_2 : std_logic_vector(width - 1 downto 0) := "000000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000";
 
 begin
 
@@ -529,11 +531,36 @@ begin
 
         Y3_next <= mult_prd;
 
-        state_next <= c12;
+        state_next <= c12_init;
 
-      when c12 =>                       -- Y3 <= Y3/2
+      when c12_init =>                  -- Y3 <= Y3/2
 
-        Y3_next <= Y3_tmp(Y3_tmp'high) & Y3_tmp(width - 1 downto 1);
+        mult_a_next     <= Y3_tmp;
+        mult_b_next     <= inverse_2;
+        mult_reset_next <= '1';
+
+        state_next <= c12_start;
+
+      when c12_start =>
+
+        mult_reset_next <= '0';
+        mult_start_next <= '1';
+
+        state_next <= c12_wait;
+
+      when c12_wait =>
+
+        mult_start_next <= '0';
+
+        if mult_ready = '1' then
+          state_next <= c12_result;
+        else
+          state_next <= c12_wait;
+        end if;
+
+      when c12_result =>
+
+        Y3_next <= mult_prd;
 
         state_next <= c13_init;
 
