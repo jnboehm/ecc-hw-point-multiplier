@@ -26,6 +26,7 @@ end projtoaffine;
 -- have Jacobian coordinates.
 architecture Behavioral of projtoaffine is
   type state_t is (idle, load,
+                   check_infty,
                    inv_init, inv_begin, inv_wait, inv_result,  -- calc Z_in^(-1)
                    squ_init, squ_begin, squ_wait, squ_result,  -- calc Z^-2
                    cb_init, cb_begin, cb_wait, cb_result,      -- calc Z^-3
@@ -153,6 +154,7 @@ begin
     x_affine_next <= x_affine_tmp;
     y_affine_next <= y_affine_tmp;
 
+    ready <= '0';
 
     case (state_reg) is
 
@@ -183,7 +185,18 @@ begin
         y_affine_next <= (others => '0');
 
 
-        state_next <= inv_init;
+        state_next <= check_infty;
+
+      when check_infty =>
+
+        if Z_in = (Z_in'range => '0') then
+          x_affine_next <= (others => '0');
+          y_affine_next <= (others => '0');
+
+          state_next <= output;
+        else
+          state_next <= inv_init;
+        end if;
 
       when inv_init =>                  -- z^-1
 
