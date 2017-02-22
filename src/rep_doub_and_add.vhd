@@ -136,6 +136,11 @@ begin
     Z2_next    <= Z2;
     -----------------------------------
     i_next <= i;
+    -----------------------------------
+    double_start_next <= double_start;
+    double_reset_next <= double_reset;
+    add_start_next    <= add_start;
+    add_reset_next    <= add_reset;
 
     -----------------------------------
     -- STATE LOGIC
