@@ -20,6 +20,7 @@ entity point_addition is
         X3    : out std_logic_vector(width - 1 downto 0);
         Y3    : out std_logic_vector(width - 1 downto 0);
         Z3    : out std_logic_vector(width - 1 downto 0);
+        double: out  std_logic;
         start : in  std_logic;
         ready : out std_logic;
         reset : in  std_logic);
@@ -49,7 +50,7 @@ architecture Behavioral of point_addition is
                    c6_init, c6_start, c6_wait, c6_result,      -- T2 <= T2 * y2
                    c7_init, c7_result,  -- T1 <= T1 - X1
                    c8_init, c8_result,  -- T2 <= T2 - Y1
-                   c9,                  -- if points are equal, double P or
+                   c9, output_double,   -- if points are equal, double P or
                                         -- return point at infinity
                    c10_init, c10_start, c10_wait, c10_result,  -- Z3 <= Z1 * T1
                    c11_init, c11_start, c11_wait, c11_result,  -- T3 <= T1^2
@@ -464,17 +465,27 @@ begin
       when c9 =>                        -- if points are equal, double P or
                                         -- return =>point at infinity
         if T1 = (width - 1 downto 0 => '0') then
-          -- TODO: write entity doubling and assign values
           if T2 = (width - 1 downto 0 => '0') then
-            -- double q into coord 3 and return
-            state_next <= output;
+            -- return a different ready signal, double instead of completing
+            -- the addition
+            state_next <= output_double;
+
           else
             -- point at infinity
+            X3_next <= (0 => '1', others => '0');
+            Y3_next <= (0 => '1', others => '0');
+            Z3_next <= (others => '0');
+
             state_next <= output;
           end if;
         else
           state_next <= c10_init;
         end if;
+
+      when output_double =>
+
+        double <= '1';
+        state_next <= idle;
 
       when c10_init =>                  -- Z3 <= Z1 * T1
 

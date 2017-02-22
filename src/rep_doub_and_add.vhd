@@ -31,6 +31,7 @@ architecture Behavioral of rep_doub_and_add is
                    double_init, double_begin, double_wait, double_result,
                    check_add,
                    add_init, add_begin, add_wait, add_result,
+                   add_d_init, add_d_begin, add_d_wait, add_d_result,
                    check,
                    output);
 
@@ -46,8 +47,8 @@ architecture Behavioral of rep_doub_and_add is
   -----------------------------------
   signal i  : integer;
   -----------------------------------
-  signal double_start, double_ready, double_reset : std_logic;
-  signal add_start, add_ready, add_reset          : std_logic;
+  signal double_start, double_ready, double_reset    : std_logic;
+  signal add_start, add_ready, add_reset, add_double : std_logic;
 
   -----------------------------------
   -- next signal
@@ -215,6 +216,8 @@ begin
 
         if add_ready = '1' then
           state_next <= add_result;
+        elsif add_double = '1' then
+          state_next <= add_d_init;
         else
           state_next <= add_wait;
         end if;
@@ -225,6 +228,33 @@ begin
         Z2_next <= Z2_calc;
 
         state_next <= check;
+
+      when add_d_init =>
+        double_reset_next <= '1';
+
+        state_next <= add_d_begin;
+
+      when add_d_begin =>
+        double_start_next <= '1';
+        double_reset_next <= '0';
+
+        state_next <= add_d_wait;
+
+      when add_d_wait =>
+        double_start_next <= '0';
+
+        if double_ready = '1' then
+          state_next <= add_d_result;
+        else
+          state_next <= add_d_wait;
+        end if;
+
+      when add_d_result =>
+        X2_next <= X2_calc_double;
+        Y2_next <= Y2_calc_double;
+        Z2_next <= Z2_calc_double;
+
+        state_next <= check_add;
 
       when check =>
 
@@ -279,6 +309,7 @@ begin
               X3    => X2_calc,
               Y3    => Y2_calc,
               Z3    => Z2_calc,
+              double=> add_double,
               start => add_start,
               ready => add_ready,
               reset => add_reset);
