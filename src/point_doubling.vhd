@@ -712,7 +712,7 @@ begin
   -----------------------------------
   -- ADDITION
   -----------------------------------
-  add : entity work.rc_adder_standard (Behavioral)
+  add : entity work.addmod (Behavioral)
     generic map (base  => base,
                  width => width)
     port map (a   => add_a,
