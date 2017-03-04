@@ -148,7 +148,7 @@ foreach f $file_list {
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-set_property "top" "multiplication" $obj
+set_property "top" "final_mult" $obj
 
 # Create 'constrs_1' fileset (if not found)
 if {[string equal [get_filesets -quiet constrs_1] ""]} {
