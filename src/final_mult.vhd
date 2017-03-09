@@ -11,7 +11,8 @@ entity final_mult is
           base    : integer := 18;
           k_width : integer := 192);
 
-  port (clk : in std_logic);
+  port (clk : in  std_logic;
+        led : out std_logic_vector (15 downto 0));
 
 end final_mult;
 
@@ -75,7 +76,7 @@ begin
 
   end process;
   -- Stimulus process
-  stim_proc : process
+  stim_proc : process (c_ready, ready, state_reg)
 
 
   begin
@@ -133,4 +134,22 @@ begin
   -- point at infinity
   k <= "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100110011101111011111000001101100001010001101011110010011011000110110100110100100010100000110001";
 --"110001110101110111011100101011110111011010000111000010011";
+
+  led(0) <= x(0);
+  led(1) <= x(1);
+  led(2) <= x(2);
+  led(3) <= x(3);
+  led(4) <= x(4);
+  led(5) <= x(5);
+  led(6) <= x(6);
+  led(7) <= x(7);
+  led(8) <= x(8);
+  led(9) <= x(9);
+  led(10) <= x(10);
+  led(11) <= x(11);
+  led(12) <= x(12);
+  led(13) <= x(13);
+  led(14) <= x(14);
+  led(15) <= x(15);
+
 end Behavioral;

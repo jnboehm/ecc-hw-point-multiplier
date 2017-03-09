@@ -121,8 +121,9 @@ begin
   -- DEF: state and signal assignment
   --=================================
   transition : process(X2, X2_calc, X2_calc_double, Y2, Y2_calc,
-                       Y2_calc_double, Z2, Z2_calc, Z2_calc_double, add_ready,
-                       double_ready, i, k, start, state_reg)
+                       Y2_calc_double, Z2, Z2_calc, Z2_calc_double, add_double,
+                       add_ready, add_reset, add_start, double_ready,
+                       double_reset, double_start, i, k, start, state_reg)
 
   begin
 
