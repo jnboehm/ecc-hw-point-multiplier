@@ -154,6 +154,8 @@ begin
     x_affine_next <= x_affine_tmp;
     y_affine_next <= y_affine_tmp;
 
+    inv_reset_next <= inv_reset; -- next state isnt really necessary
+
     ready <= '0';
 
     case (state_reg) is

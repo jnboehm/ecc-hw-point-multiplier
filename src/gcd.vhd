@@ -102,6 +102,7 @@ begin  -- architecture Behavioral
     t1_next    <= t1;
     t2_next    <= t2;
     t3_next    <= t3;
+    gcd        <= u3;
 
     case state_reg is
 
@@ -221,6 +222,7 @@ begin  -- architecture Behavioral
           state_next <= output;
         else
           gcd <= u3(u3'left - 1 downto 0) & "0";
+          u3_next <= u3(u3'left - 1 downto 0) & "0";
           k_next <= k - 1;
         end if;
 

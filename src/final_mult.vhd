@@ -81,6 +81,10 @@ begin
 
   begin
     state_next <= state_reg;
+    reset <= '0';
+    start <= '0';
+    c_reset <= '0';
+    c_start <= '0';
 
     -- Wait 30ns
     case state_reg is
