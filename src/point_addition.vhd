@@ -229,6 +229,9 @@ begin
     mult_start_next <= mult_start;
     mult_ready_next <= mult_ready;
     mult_prd_next   <= mult_prd;
+    -----------------------------------
+    double <= '0';
+
 
 
     -----------------------------------
